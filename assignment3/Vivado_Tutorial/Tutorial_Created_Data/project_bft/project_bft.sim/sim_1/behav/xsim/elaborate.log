@@ -1,0 +1,27 @@
+Vivado Simulator 2020.1
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: /tools/Xilinx/Vivado/2020.1/bin/unwrapped/lnx64.o/xelab -wto f5d16f418101419fb755cd2f50c9db87 --incr --debug typical --relax --mt 8 -L xil_defaultlib -L bftlib -L unisims_ver -L unimacro_ver -L secureip --snapshot bft_tb_behav xil_defaultlib.bft_tb xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.std_logic_arith
+Compiling package ieee.std_logic_signed
+Compiling package bftlib.bftpackage
+Compiling architecture act of entity bftlib.coreTransform [coretransform_default]
+Compiling architecture ar1 of entity bftlib.round_1 [round_1_default]
+Compiling architecture ar2 of entity bftlib.round_2 [round_2_default]
+Compiling architecture ar3 of entity bftlib.round_3 [round_3_default]
+Compiling architecture ar4 of entity bftlib.round_4 [round_4_default]
+Compiling module xil_defaultlib.async_fifo(DEVICE="7SERIES",FIFO...
+Compiling module xil_defaultlib.FifoBuffer
+Compiling architecture abft of entity xil_defaultlib.bft [bft_default]
+Compiling module xil_defaultlib.bft_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot bft_tb_behav

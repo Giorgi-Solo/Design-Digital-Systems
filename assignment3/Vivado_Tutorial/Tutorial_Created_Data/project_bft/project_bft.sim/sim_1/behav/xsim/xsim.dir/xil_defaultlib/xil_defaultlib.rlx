@@ -1,0 +1,9 @@
+0.7
+2020.1
+May 27 2020
+19:59:15
+/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.sim/sim_1/behav/xsim/glbl.v,1590624368,verilog,,,,glbl,,,,,,,,
+/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sim_1/imports/hdl/bft_tb.v,1455884190,verilog,,,,bft_tb,,,,,,,,
+/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sources_1/imports/hdl/FifoBuffer.v,1455884190,verilog,,/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sources_1/imports/hdl/async_fifo.v,,FifoBuffer,,,,,,,,
+/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sources_1/imports/hdl/async_fifo.v,1455884190,verilog,,/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sim_1/imports/hdl/bft_tb.v,,async_fifo,,,,,,,,
+/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sources_1/imports/hdl/bft.vhdl,1455884190,vhdl,,,,bft,,,,,,,,

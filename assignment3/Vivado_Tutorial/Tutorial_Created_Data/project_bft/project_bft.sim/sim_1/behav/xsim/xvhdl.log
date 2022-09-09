@@ -1,0 +1,13 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sources_1/imports/hdl/bftLib/bft_package.vhdl" into library bftlib
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sources_1/imports/hdl/bftLib/core_transform.vhdl" into library bftlib
+INFO: [VRFC 10-3107] analyzing entity 'coreTransform'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sources_1/imports/hdl/bftLib/round_1.vhdl" into library bftlib
+INFO: [VRFC 10-3107] analyzing entity 'round_1'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sources_1/imports/hdl/bftLib/round_2.vhdl" into library bftlib
+INFO: [VRFC 10-3107] analyzing entity 'round_2'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sources_1/imports/hdl/bftLib/round_3.vhdl" into library bftlib
+INFO: [VRFC 10-3107] analyzing entity 'round_3'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sources_1/imports/hdl/bftLib/round_4.vhdl" into library bftlib
+INFO: [VRFC 10-3107] analyzing entity 'round_4'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sources_1/imports/hdl/bft.vhdl" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'bft'

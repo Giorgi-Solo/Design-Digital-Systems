@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:35 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Fri Sep  9 13:04:01 2022
+# Process ID: 29840
+# Current directory: /home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.runs/synth_1
+# Command line: vivado -log bft.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source bft.tcl
+# Log file: /home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.runs/synth_1/bft.vds
+# Journal file: /home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.runs/synth_1/vivado.jou
+#-----------------------------------------------------------
+source bft.tcl -notrace

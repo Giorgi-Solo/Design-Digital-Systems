@@ -1,0 +1,116 @@
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2020.1 (lin64) Build 2902540 Wed May 27 19:54:35 MDT 2020
+| Date         : Fri Sep  9 13:06:10 2022
+| Host         : Giorgi-Solo running 64-bit Ubuntu 18.04.1 LTS
+| Command      : report_control_sets -verbose -file bft_control_sets_placed.rpt
+| Design       : bft
+| Device       : xc7k70t
+------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    38 |
+|    Minimum number of control sets                        |    38 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    54 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    38 |
+| >= 0 to < 4        |     2 |
+| >= 4 to < 6        |     0 |
+| >= 6 to < 8        |     1 |
+| >= 8 to < 10       |     0 |
+| >= 10 to < 12      |     0 |
+| >= 12 to < 14      |     0 |
+| >= 14 to < 16      |     0 |
+| >= 16              |    35 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |               2 |            2 |
+| No           | No                    | Yes                    |              32 |           31 |
+| No           | Yes                   | No                     |              17 |            7 |
+| Yes          | No                    | No                     |               0 |            0 |
+| Yes          | No                    | Yes                    |            1248 |          279 |
+| Yes          | Yes                   | No                     |              39 |           10 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++-------------------+-----------------------------------------------------------------------------+-----------------------------------------------------+------------------+----------------+--------------+
+|    Clock Signal   |                                Enable Signal                                |                   Set/Reset Signal                  | Slice Load Count | Bel Load Count | Bels / Slice |
++-------------------+-----------------------------------------------------------------------------+-----------------------------------------------------+------------------+----------------+--------------+
+|  wbClk_IBUF_BUFG  |                                                                             | egressLoop[7].egressFifo/buffer_fifo/demuxState_reg |                1 |              1 |         1.00 |
+|  wbClk_IBUF_BUFG  |                                                                             |                                                     |                2 |              2 |         1.00 |
+|  wbClk_IBUF_BUFG  | demuxState_reg_n_0                                                          | fifoSelect[3]                                       |                1 |              7 |         7.00 |
+|  wbClk_IBUF_BUFG  |                                                                             | reset_IBUF                                          |               19 |             22 |         1.16 |
+|  bftClk_IBUF_BUFG |                                                                             | reset_IBUF                                          |               18 |             26 |         1.44 |
+|  wbClk_IBUF_BUFG  | wbOutputData[31]_i_2_n_0                                                    | egressLoop[7].egressFifo/buffer_fifo/SR[0]          |                9 |             32 |         3.56 |
+|  wbClk_IBUF_BUFG  | egressLoop[6].egressFifo/buffer_fifo/infer_fifo.two_rd_addr[9]_i_1__13_n_0  | reset_IBUF                                          |                9 |             39 |         4.33 |
+|  bftClk_IBUF_BUFG | egressLoop[3].egressFifo/buffer_fifo/infer_fifo.wr_addr[9]_i_1__10_n_0      | reset_IBUF                                          |                9 |             39 |         4.33 |
+|  bftClk_IBUF_BUFG | ingressLoop[5].ingressFifo/buffer_fifo/infer_fifo.two_rd_addr[9]_i_1__4_n_0 | reset_IBUF                                          |                7 |             39 |         5.57 |
+|  wbClk_IBUF_BUFG  | ingressLoop[0].ingressFifo/buffer_fifo/infer_fifo.wr_addr[9]_i_1__6_n_0     | reset_IBUF                                          |                9 |             39 |         4.33 |
+|  wbClk_IBUF_BUFG  | egressLoop[1].egressFifo/buffer_fifo/infer_fifo.two_rd_addr[9]_i_1__8_n_0   | reset_IBUF                                          |               10 |             39 |         3.90 |
+|  wbClk_IBUF_BUFG  | egressLoop[0].egressFifo/buffer_fifo/infer_fifo.two_rd_addr[9]_i_1__7_n_0   | reset_IBUF                                          |                8 |             39 |         4.88 |
+|  wbClk_IBUF_BUFG  | ingressLoop[6].ingressFifo/buffer_fifo/infer_fifo.wr_addr[9]_i_1__4_n_0     | reset_IBUF                                          |                8 |             39 |         4.88 |
+|  wbClk_IBUF_BUFG  | ingressLoop[4].ingressFifo/buffer_fifo/infer_fifo.wr_addr[9]_i_1__5_n_0     | reset_IBUF                                          |               11 |             39 |         3.55 |
+|  wbClk_IBUF_BUFG  | egressLoop[2].egressFifo/buffer_fifo/infer_fifo.two_rd_addr[9]_i_1__9_n_0   | reset_IBUF                                          |                7 |             39 |         5.57 |
+|  wbClk_IBUF_BUFG  | egressLoop[4].egressFifo/buffer_fifo/infer_fifo.two_rd_addr[9]_i_1__11_n_0  | reset_IBUF                                          |                9 |             39 |         4.33 |
+|  wbClk_IBUF_BUFG  | egressLoop[5].egressFifo/buffer_fifo/infer_fifo.two_rd_addr[9]_i_1__12_n_0  | reset_IBUF                                          |                7 |             39 |         5.57 |
+|  wbClk_IBUF_BUFG  | ingressLoop[7].ingressFifo/buffer_fifo/infer_fifo.wr_addr[9]_i_1__2_n_0     | reset_IBUF                                          |                7 |             39 |         5.57 |
+|  wbClk_IBUF_BUFG  | ingressLoop[1].ingressFifo/buffer_fifo/infer_fifo.wr_addr[9]_i_1_n_0        | reset_IBUF                                          |               11 |             39 |         3.55 |
+|  wbClk_IBUF_BUFG  | ingressLoop[3].ingressFifo/buffer_fifo/infer_fifo.wr_addr[9]_i_1__1_n_0     | reset_IBUF                                          |               11 |             39 |         3.55 |
+|  wbClk_IBUF_BUFG  | ingressLoop[2].ingressFifo/buffer_fifo/infer_fifo.wr_addr[9]_i_1__3_n_0     | reset_IBUF                                          |                9 |             39 |         4.33 |
+|  wbClk_IBUF_BUFG  | egressLoop[7].egressFifo/buffer_fifo/infer_fifo.two_rd_addr[9]_i_1__14_n_0  | reset_IBUF                                          |               10 |             39 |         3.90 |
+|  bftClk_IBUF_BUFG | ingressLoop[3].ingressFifo/buffer_fifo/infer_fifo.two_rd_addr[9]_i_1__2_n_0 | reset_IBUF                                          |                8 |             39 |         4.88 |
+|  wbClk_IBUF_BUFG  | ingressLoop[5].ingressFifo/buffer_fifo/infer_fifo.wr_addr[9]_i_1__0_n_0     | reset_IBUF                                          |               10 |             39 |         3.90 |
+|  wbClk_IBUF_BUFG  | egressLoop[3].egressFifo/buffer_fifo/infer_fifo.two_rd_addr[9]_i_1__10_n_0  | reset_IBUF                                          |                9 |             39 |         4.33 |
+|  bftClk_IBUF_BUFG | egressLoop[6].egressFifo/buffer_fifo/infer_fifo.wr_addr[9]_i_1__13_n_0      | reset_IBUF                                          |                7 |             39 |         5.57 |
+|  bftClk_IBUF_BUFG | egressLoop[7].egressFifo/buffer_fifo/infer_fifo.wr_addr[9]_i_1__14_n_0      | reset_IBUF                                          |                7 |             39 |         5.57 |
+|  bftClk_IBUF_BUFG | ingressLoop[2].ingressFifo/buffer_fifo/infer_fifo.two_rd_addr[9]_i_1__1_n_0 | reset_IBUF                                          |                8 |             39 |         4.88 |
+|  bftClk_IBUF_BUFG | egressLoop[0].egressFifo/buffer_fifo/infer_fifo.wr_addr[9]_i_1__7_n_0       | reset_IBUF                                          |                9 |             39 |         4.33 |
+|  bftClk_IBUF_BUFG | ingressLoop[0].ingressFifo/buffer_fifo/infer_fifo.two_rd_addr[9]_i_1_n_0    | reset_IBUF                                          |                8 |             39 |         4.88 |
+|  bftClk_IBUF_BUFG | egressLoop[1].egressFifo/buffer_fifo/infer_fifo.wr_addr[9]_i_1__8_n_0       | reset_IBUF                                          |                9 |             39 |         4.33 |
+|  bftClk_IBUF_BUFG | ingressLoop[6].ingressFifo/buffer_fifo/infer_fifo.two_rd_addr[9]_i_1__5_n_0 | reset_IBUF                                          |               10 |             39 |         3.90 |
+|  bftClk_IBUF_BUFG | egressLoop[5].egressFifo/buffer_fifo/infer_fifo.wr_addr[9]_i_1__12_n_0      | reset_IBUF                                          |                9 |             39 |         4.33 |
+|  bftClk_IBUF_BUFG | ingressLoop[4].ingressFifo/buffer_fifo/infer_fifo.two_rd_addr[9]_i_1__3_n_0 | reset_IBUF                                          |                9 |             39 |         4.33 |
+|  bftClk_IBUF_BUFG | egressLoop[2].egressFifo/buffer_fifo/infer_fifo.wr_addr[9]_i_1__9_n_0       | reset_IBUF                                          |                7 |             39 |         5.57 |
+|  bftClk_IBUF_BUFG | egressLoop[4].egressFifo/buffer_fifo/infer_fifo.wr_addr[9]_i_1__11_n_0      | reset_IBUF                                          |                9 |             39 |         4.33 |
+|  bftClk_IBUF_BUFG | ingressLoop[7].ingressFifo/buffer_fifo/infer_fifo.two_rd_addr[9]_i_1__6_n_0 | reset_IBUF                                          |               11 |             39 |         3.55 |
+|  bftClk_IBUF_BUFG | ingressLoop[1].ingressFifo/buffer_fifo/infer_fifo.two_rd_addr[9]_i_1__0_n_0 | reset_IBUF                                          |                7 |             39 |         5.57 |
++-------------------+-----------------------------------------------------------------------------+-----------------------------------------------------+------------------+----------------+--------------+
+
+

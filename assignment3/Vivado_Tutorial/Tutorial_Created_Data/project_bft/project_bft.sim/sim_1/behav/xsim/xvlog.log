@@ -1,0 +1,12 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sources_1/imports/hdl/FifoBuffer.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module FifoBuffer
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sources_1/imports/hdl/async_fifo.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module async_fifo
+INFO: [VRFC 10-2458] undeclared symbol RDERR, assumed default net type wire [/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sources_1/imports/hdl/async_fifo.v:211]
+INFO: [VRFC 10-2458] undeclared symbol WRER, assumed default net type wire [/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sources_1/imports/hdl/async_fifo.v:212]
+INFO: [VRFC 10-2458] undeclared symbol RDERR, assumed default net type wire [/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sources_1/imports/hdl/async_fifo.v:218]
+INFO: [VRFC 10-2458] undeclared symbol WRER, assumed default net type wire [/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sources_1/imports/hdl/async_fifo.v:219]
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/sim_1/imports/hdl/bft_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module bft_tb
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl

@@ -1,0 +1,473 @@
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2020.1 (lin64) Build 2902540 Wed May 27 19:54:35 MDT 2020
+| Date         : Fri Sep  9 13:06:34 2022
+| Host         : Giorgi-Solo running 64-bit Ubuntu 18.04.1 LTS
+| Command      : report_methodology -file bft_methodology_drc_routed.rpt -pb bft_methodology_drc_routed.pb -rpx bft_methodology_drc_routed.rpx
+| Design       : bft
+| Device       : xc7k70tfbg484-2
+| Speed File   : -2
+| Design State : Fully Routed
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+Report Methodology
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+             Max violations: <unlimited>
+             Violations found: 85
++-----------+------------------+------------------------------------------------------+------------+
+| Rule      | Severity         | Description                                          | Violations |
++-----------+------------------+------------------------------------------------------+------------+
+| TIMING-6  | Critical Warning | No common primary clock between related clocks       | 2          |
+| TIMING-7  | Critical Warning | No common node between related clocks                | 2          |
+| SYNTH-6   | Warning          | Timing of a RAM block might be sub-optimal           | 8          |
+| TIMING-18 | Warning          | Missing input or output delay                        | 69         |
+| XDCC-4    | Warning          | User Clock constraint overwritten with the same name | 2          |
+| XDCC-8    | Warning          | User Clock constraint overwritten on the same source | 2          |
++-----------+------------------+------------------------------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+TIMING-6#1 Critical Warning
+No common primary clock between related clocks  
+The clocks bftClk and wbClk are related (timed together) but they have no common primary clock. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks bftClk] -to [get_clocks wbClk]
+Related violations: <none>
+
+TIMING-6#2 Critical Warning
+No common primary clock between related clocks  
+The clocks wbClk and bftClk are related (timed together) but they have no common primary clock. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks wbClk] -to [get_clocks bftClk]
+Related violations: <none>
+
+TIMING-7#1 Critical Warning
+No common node between related clocks  
+The clocks bftClk and wbClk are related (timed together) but they have no common node. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks bftClk] -to [get_clocks wbClk]
+Related violations: <none>
+
+TIMING-7#2 Critical Warning
+No common node between related clocks  
+The clocks wbClk and bftClk are related (timed together) but they have no common node. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks wbClk] -to [get_clocks bftClk]
+Related violations: <none>
+
+SYNTH-6#1 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ingressLoop[0].ingressFifo/buffer_fifo/infer_fifo.block_ram_performance.fifo_ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#2 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ingressLoop[1].ingressFifo/buffer_fifo/infer_fifo.block_ram_performance.fifo_ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#3 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ingressLoop[2].ingressFifo/buffer_fifo/infer_fifo.block_ram_performance.fifo_ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#4 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ingressLoop[3].ingressFifo/buffer_fifo/infer_fifo.block_ram_performance.fifo_ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#5 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ingressLoop[4].ingressFifo/buffer_fifo/infer_fifo.block_ram_performance.fifo_ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#6 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ingressLoop[5].ingressFifo/buffer_fifo/infer_fifo.block_ram_performance.fifo_ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#7 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ingressLoop[6].ingressFifo/buffer_fifo/infer_fifo.block_ram_performance.fifo_ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#8 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ingressLoop[7].ingressFifo/buffer_fifo/infer_fifo.block_ram_performance.fifo_ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+TIMING-18#1 Warning
+Missing input or output delay  
+An input delay is missing on reset relative to clock(s) bftClk, wbClk
+Related violations: <none>
+
+TIMING-18#2 Warning
+Missing input or output delay  
+An input delay is missing on wbDataForInput relative to clock(s) bftClk, wbClk
+Related violations: <none>
+
+TIMING-18#3 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[0] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#4 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[10] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#5 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[11] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#6 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[12] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#7 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[13] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#8 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[14] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#9 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[15] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#10 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[16] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#11 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[17] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#12 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[18] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#13 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[19] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#14 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[1] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#15 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[20] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#16 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[21] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#17 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[22] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#18 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[23] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#19 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[24] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#20 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[25] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#21 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[26] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#22 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[27] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#23 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[28] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#24 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[29] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#25 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[2] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#26 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[30] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#27 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[31] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#28 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[3] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#29 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[4] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#30 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[5] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#31 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[6] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#32 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[7] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#33 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[8] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#34 Warning
+Missing input or output delay  
+An input delay is missing on wbInputData[9] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#35 Warning
+Missing input or output delay  
+An input delay is missing on wbWriteOut relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#36 Warning
+Missing input or output delay  
+An output delay is missing on error relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#37 Warning
+Missing input or output delay  
+An output delay is missing on wbDataForOutput relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#38 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[0] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#39 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[10] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#40 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[11] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#41 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[12] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#42 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[13] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#43 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[14] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#44 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[15] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#45 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[16] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#46 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[17] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#47 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[18] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#48 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[19] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#49 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[1] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#50 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[20] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#51 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[21] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#52 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[22] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#53 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[23] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#54 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[24] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#55 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[25] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#56 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[26] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#57 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[27] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#58 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[28] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#59 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[29] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#60 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[2] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#61 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[30] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#62 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[31] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#63 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[3] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#64 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[4] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#65 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[5] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#66 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[6] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#67 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[7] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#68 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[8] relative to clock(s) wbClk
+Related violations: <none>
+
+TIMING-18#69 Warning
+Missing input or output delay  
+An output delay is missing on wbOutputData[9] relative to clock(s) wbClk
+Related violations: <none>
+
+XDCC-4#1 Warning
+User Clock constraint overwritten with the same name  
+A new clock constraint create_clock overrides a previous user clock constraint with the same name.
+New: create_clock -period 10.000 -name wbClk [get_ports wbClk] (Source: /home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/constrs_1/imports/Sources/bft_full_kintex7.xdc (Line: 2))
+Previous: create_clock -period 10.000 -name wbClk [get_ports wbClk] (Source: /home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/constrs_1/imports/Sources/bft.xdc (Line: 1))
+Related violations: <none>
+
+XDCC-4#2 Warning
+User Clock constraint overwritten with the same name  
+A new clock constraint create_clock overrides a previous user clock constraint with the same name.
+New: create_clock -period 5.000 -name bftClk [get_ports bftClk] (Source: /home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/constrs_1/imports/Sources/bft_full_kintex7.xdc (Line: 3))
+Previous: create_clock -period 5.000 -name bftClk [get_ports bftClk] (Source: /home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/constrs_1/imports/Sources/bft.xdc (Line: 2))
+Related violations: <none>
+
+XDCC-8#1 Warning
+User Clock constraint overwritten on the same source  
+A new clock constraint create_clock overrides a previous user clock constraint defined on the same source.
+New: create_clock -period 10.000 -name wbClk [get_ports wbClk] (Source: /home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/constrs_1/imports/Sources/bft_full_kintex7.xdc (Line: 2))
+Previous: create_clock -period 10.000 -name wbClk [get_ports wbClk] (Source: /home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/constrs_1/imports/Sources/bft.xdc (Line: 1))
+Related violations: <none>
+
+XDCC-8#2 Warning
+User Clock constraint overwritten on the same source  
+A new clock constraint create_clock overrides a previous user clock constraint defined on the same source.
+New: create_clock -period 5.000 -name bftClk [get_ports bftClk] (Source: /home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/constrs_1/imports/Sources/bft_full_kintex7.xdc (Line: 3))
+Previous: create_clock -period 5.000 -name bftClk [get_ports bftClk] (Source: /home/giorgi/Desktop/ass3/Vivado_Tutorial/Tutorial_Created_Data/project_bft/project_bft.srcs/constrs_1/imports/Sources/bft.xdc (Line: 2))
+Related violations: <none>
+
+

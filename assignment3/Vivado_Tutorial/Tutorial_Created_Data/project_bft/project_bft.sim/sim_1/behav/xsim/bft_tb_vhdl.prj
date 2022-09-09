@@ -1,0 +1,14 @@
+# compile vhdl design source files
+vhdl bftlib  \
+"../../../../project_bft.srcs/sources_1/imports/hdl/bftLib/bft_package.vhdl" \
+"../../../../project_bft.srcs/sources_1/imports/hdl/bftLib/core_transform.vhdl" \
+"../../../../project_bft.srcs/sources_1/imports/hdl/bftLib/round_1.vhdl" \
+"../../../../project_bft.srcs/sources_1/imports/hdl/bftLib/round_2.vhdl" \
+"../../../../project_bft.srcs/sources_1/imports/hdl/bftLib/round_3.vhdl" \
+"../../../../project_bft.srcs/sources_1/imports/hdl/bftLib/round_4.vhdl" \
+
+vhdl xil_defaultlib  \
+"../../../../project_bft.srcs/sources_1/imports/hdl/bft.vhdl" \
+
+# Do not sort compile order
+nosort

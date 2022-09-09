@@ -1,0 +1,11 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../project_bft.srcs/sources_1/imports/hdl/FifoBuffer.v" \
+"../../../../project_bft.srcs/sources_1/imports/hdl/async_fifo.v" \
+"../../../../project_bft.srcs/sim_1/imports/hdl/bft_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
