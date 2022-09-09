@@ -1,0 +1,4 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/SOLO/Desktop/EMECS/NTNU/DD1/Assignments/ass2/ass2.srcs/sources_1/new/assignment2.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'assignment2'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/SOLO/Desktop/EMECS/NTNU/DD1/Assignments/ass2/ass2.srcs/sim_1/new/testbench.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'testbench'
