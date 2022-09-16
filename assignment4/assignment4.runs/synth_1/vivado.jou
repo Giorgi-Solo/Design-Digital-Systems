@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:35 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Fri Sep 16 13:16:26 2022
+# Process ID: 4463
+# Current directory: /home/giorgi/Desktop/DDS I/assignment4/assignment4.runs/synth_1
+# Command line: vivado -log sensitivity_lists.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source sensitivity_lists.tcl
+# Log file: /home/giorgi/Desktop/DDS I/assignment4/assignment4.runs/synth_1/sensitivity_lists.vds
+# Journal file: /home/giorgi/Desktop/DDS I/assignment4/assignment4.runs/synth_1/vivado.jou
+#-----------------------------------------------------------
+source sensitivity_lists.tcl -notrace
