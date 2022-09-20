@@ -1,6 +1,4 @@
 
-// uint32_t squareMod(int a, int b, int n);
-#include <stdint.h>
 #include "RSA.h"
 
 uint32_t encryption(uint32_t M, uint32_t e, uint32_t n)
