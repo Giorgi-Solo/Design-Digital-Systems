@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
 -- Company    :  NTNU
--- Engineer   : Øystein Gjermundnes
+-- Engineer   : ï¿½ystein Gjermundnes
 -- 
 -- Create Date: 09/11/2016 04:21:16 PM
 -- Module Name: mega_adder_tb
