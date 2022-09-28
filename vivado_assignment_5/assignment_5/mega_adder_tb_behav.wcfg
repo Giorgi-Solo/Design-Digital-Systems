@@ -10,15 +10,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="394200fs"></ZoomStartTime>
-      <ZoomEndTime time="407161fs"></ZoomEndTime>
-      <Cursor1Time time="405000fs"></Cursor1Time>
+      <ZoomStartTime time="219924fs"></ZoomStartTime>
+      <ZoomEndTime time="250383fs"></ZoomEndTime>
+      <Cursor1Time time="225000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="156"></NameColumnWidth>
-      <ValueColumnWidth column_width="128"></ValueColumnWidth>
+      <ValueColumnWidth column_width="124"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="23" />
+   <WVObjectSize size="24" />
    <wvobject type="logic" fp_name="/mega_adder_tb/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -110,5 +110,9 @@
    <wvobject type="array" fp_name="/mega_adder_tb/dut/u_adder_datapath/b_rb">
       <obj_property name="ElementShortName">b_rb[127:0]</obj_property>
       <obj_property name="ObjectShortName">b_rb[127:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mega_adder_tb/dut/u_adder_datapath/tmp">
+      <obj_property name="ElementShortName">tmp[32:0]</obj_property>
+      <obj_property name="ObjectShortName">tmp[32:0]</obj_property>
    </wvobject>
 </wave_config>
