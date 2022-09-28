@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="mega_adder_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="mega_adder_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="394200fs"></ZoomStartTime>
+      <ZoomEndTime time="407161fs"></ZoomEndTime>
+      <Cursor1Time time="405000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="156"></NameColumnWidth>
+      <ValueColumnWidth column_width="128"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="23" />
+   <wvobject type="logic" fp_name="/mega_adder_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mega_adder_tb/reset_n">
+      <obj_property name="ElementShortName">reset_n</obj_property>
+      <obj_property name="ObjectShortName">reset_n</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/mega_adder_tb/COUNTER_WIDTH">
+      <obj_property name="ElementShortName">COUNTER_WIDTH</obj_property>
+      <obj_property name="ObjectShortName">COUNTER_WIDTH</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/mega_adder_tb/CLK_PERIOD">
+      <obj_property name="ElementShortName">CLK_PERIOD</obj_property>
+      <obj_property name="ObjectShortName">CLK_PERIOD</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/mega_adder_tb/RESET_TIME">
+      <obj_property name="ElementShortName">RESET_TIME</obj_property>
+      <obj_property name="ObjectShortName">RESET_TIME</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mega_adder_tb/dut/u_adder_datapath/input_reg_en">
+      <obj_property name="ElementShortName">input_reg_en</obj_property>
+      <obj_property name="ObjectShortName">input_reg_en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mega_adder_tb/dut/u_adder_datapath/output_reg_en">
+      <obj_property name="ElementShortName">output_reg_en</obj_property>
+      <obj_property name="ObjectShortName">output_reg_en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mega_adder_tb/dut/u_adder_datapath/output_reg_load">
+      <obj_property name="ElementShortName">output_reg_load</obj_property>
+      <obj_property name="ObjectShortName">output_reg_load</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mega_adder_tb/data_in_ready">
+      <obj_property name="ElementShortName">data_in_ready</obj_property>
+      <obj_property name="ObjectShortName">data_in_ready</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mega_adder_tb/data_in_valid">
+      <obj_property name="ElementShortName">data_in_valid</obj_property>
+      <obj_property name="ObjectShortName">data_in_valid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mega_adder_tb/data_in">
+      <obj_property name="ElementShortName">data_in[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mega_adder_tb/data_out_ready">
+      <obj_property name="ElementShortName">data_out_ready</obj_property>
+      <obj_property name="ObjectShortName">data_out_ready</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mega_adder_tb/data_out_valid">
+      <obj_property name="ElementShortName">data_out_valid</obj_property>
+      <obj_property name="ObjectShortName">data_out_valid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mega_adder_tb/data_out">
+      <obj_property name="ElementShortName">data_out[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_out[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mega_adder_tb/dut/u_adder_datapath/a_r">
+      <obj_property name="ElementShortName">a_r[127:0]</obj_property>
+      <obj_property name="ObjectShortName">a_r[127:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mega_adder_tb/dut/u_adder_datapath/b_r">
+      <obj_property name="ElementShortName">b_r[127:0]</obj_property>
+      <obj_property name="ObjectShortName">b_r[127:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mega_adder_tb/dut/u_adder_datapath/y_r">
+      <obj_property name="ElementShortName">y_r[32:0]</obj_property>
+      <obj_property name="ObjectShortName">y_r[32:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mega_adder_tb/dut/u_adder_datapath/a_nxt">
+      <obj_property name="ElementShortName">a_nxt[127:0]</obj_property>
+      <obj_property name="ObjectShortName">a_nxt[127:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mega_adder_tb/dut/u_adder_datapath/b_nxt">
+      <obj_property name="ElementShortName">b_nxt[127:0]</obj_property>
+      <obj_property name="ObjectShortName">b_nxt[127:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mega_adder_tb/dut/u_adder_datapath/cnt">
+      <obj_property name="ElementShortName">cnt[1:0]</obj_property>
+      <obj_property name="ObjectShortName">cnt[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mega_adder_tb/dut/u_adder_datapath/en">
+      <obj_property name="ElementShortName">en</obj_property>
+      <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mega_adder_tb/dut/u_adder_datapath/a_rb">
+      <obj_property name="ElementShortName">a_rb[127:0]</obj_property>
+      <obj_property name="ObjectShortName">a_rb[127:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mega_adder_tb/dut/u_adder_datapath/b_rb">
+      <obj_property name="ElementShortName">b_rb[127:0]</obj_property>
+      <obj_property name="ObjectShortName">b_rb[127:0]</obj_property>
+   </wvobject>
+</wave_config>
