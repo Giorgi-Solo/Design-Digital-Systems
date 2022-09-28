@@ -78,7 +78,7 @@ begin
     -- Send in first test vector
     wait for 10*CLK_PERIOD;
     data_in_valid <= '1';
-    data_in       <= x"00000000";
+    data_in       <= x"00000009";
     
     wait for 1*CLK_PERIOD;
     data_in       <= x"00000001";    
@@ -90,7 +90,7 @@ begin
     data_in       <= x"00000003";
 
     wait for 1*CLK_PERIOD;
-    data_in       <= x"00000000";
+    data_in       <= x"00000090";
     
     wait for 1*CLK_PERIOD;
     data_in       <= x"00000010";    
