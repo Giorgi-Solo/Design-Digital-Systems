@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include "../RSA.h"
 
-void checkAlgorithm();
+int checkAlgorithm();
 
-
+int checkModularMult();
 
 
 
