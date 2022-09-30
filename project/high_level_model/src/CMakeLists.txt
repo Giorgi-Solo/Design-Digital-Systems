@@ -3,5 +3,5 @@ project(untitled C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(untitled main.c RSA.c)
+add_executable(RSA main.c RSA.c test/test.c)
 
