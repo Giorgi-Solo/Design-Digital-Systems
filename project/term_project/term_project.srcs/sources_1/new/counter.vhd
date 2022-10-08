@@ -7,9 +7,9 @@
 -- Module Name: counter - Behavioral 
 -- Description: 
 --             Inputs:  start
---             Outputs: reg_en
+--             Outputs: reg_en_i
 --
---              This module asserts reg_en after each 256 clock cycles 
+--              This module asserts reg_en_i after each 256 clock cycles 
 ----------------------------------------------------------------------------------
 
 
@@ -31,33 +31,39 @@ entity counter is
     start  : in  std_logic;
     
     -- Output to RSA_Core datapath
-    reg_en    : out std_logic
+    reg_en_i    : out std_logic
    );
 end counter;
 
 architecture Behavioral of counter is
 
-    signal counter : std_logic_vector(7 downto 0);
-
+    signal counter  : std_logic_vector(7 downto 0);
+    signal reg_en_R : std_logic;
 begin
 
     CounterProc: process(clk, reset_n) begin
         if (reset_n = '0') then
             counter <= (others => '0');
-            reg_en  <= '0';
+            reg_en_R  <= '0';
         elsif (clk'event and clk='1') then
             if (start = '1') then
                 counter <= (others => '0');
-                reg_en  <= '0';
+                reg_en_R  <= '0';
             else 
-                counter <= std_logic_vector(UNSIGNED(counter) + 1);
-                if (counter = x"FF") then
-                    reg_en <= '1';
+                if (reg_en_R = '1') then
+                    counter <= (others => '0');
                 else
-                    reg_en <= '0';
+                    counter <= std_logic_vector(UNSIGNED(counter) + 1);
+                end if;
+                
+                if (counter = x"FF") then
+                    reg_en_R <= '1';
+                else
+                    reg_en_R <= '0';
                 end if;
             end if;
         end if;
     end process CounterProc;
-
+    
+    reg_en_i <= reg_en_R;
 end Behavioral;
