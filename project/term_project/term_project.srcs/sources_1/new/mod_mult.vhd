@@ -2,7 +2,8 @@
 -- Company    : NTNU
 -- Engineer   : Giorgi Solomishvili
 --              Besjan Tomja
---              Mohamed Mahmoud Sayed Shelkamy Ali-- 
+--              Mohamed Mahmoud Sayed Shelkamy Ali
+-- 
 -- Create Date: 10/09/2022 12:25:11 AM
 -- Module Name: mod_mult - Behavioral
 -- Description: 
@@ -39,7 +40,7 @@ end mod_mult;
 architecture Behavioral of mod_mult is
     
     signal r_reg, r_nxt : std_logic_vector(255 downto 0);
-    signal r_reg_shift  : std_logic_vector(255 downto 0); -- r_reg_shift = 2*r_reg
+--    signal r_reg_shift  : std_logic_vector(255 downto 0); -- r_reg_shift = 2*r_reg
     
     signal shift_reg_A  : std_logic_vector(254 downto 0);
     signal load_reg     : std_logic;
@@ -47,7 +48,7 @@ architecture Behavioral of mod_mult is
     signal Mx1_o                    : std_logic; 
     signal Mx2_o_partial_sum, Mx3_o : std_logic_vector(255 downto 0);
     
-    signal twoN : std_logic_vector(255 downto 0);
+    signal twoN, twoR : std_logic_vector(255 downto 0);
     
     signal isSumLessN, isSumLess2N : boolean;
     
@@ -79,7 +80,7 @@ begin
             if (reg_en = '1') then
                 r_reg <= (others => '0');
             else 
-                r_reg <= r_nxt(254 downto 0) & '0'; -- this is 2r 
+                r_reg <= r_nxt; -- this is r 
             end if;
         end if;
     end process r_register;
@@ -110,19 +111,20 @@ begin
   -- ***************************************************************************
     Mx1_o <= a(255) when load_reg = '1' else
              shift_reg_A(254);
-            
+      
+      
+  -- Calculation of 2*N and 2* r
+    twoN <= n(254 downto 0) & '0';
+    twoR <= r_reg(254 downto 0) & '0';    
+      
         
   -- ***************************************************************************
   -- Multiplexer 2 - Mx2 (See microarchitecture for Blakley).
   -- This multiplexer chooses between 2*R and 2*R + b. 
   -- The output is partial sum. Decision is made based on Mx1_o
   -- ***************************************************************************
-    Mx2_o_partial_sum <= std_logic_vector(UNSIGNED(r_reg) + UNSIGNED(b)) when Mx1_o = '1' else
-             r_reg;
-
-    
-  -- Calculation of 2*N
-    twoN <= n(254 downto 0) & '0';
+    Mx2_o_partial_sum <= std_logic_vector(UNSIGNED(twoR) + UNSIGNED(b)) when Mx1_o = '1' else
+             twoR;
     
   -- Evaluation for select signals for Mx3 and Mx4 (See microarchitecture for Blakley). 
     isSumLessN  <= Mx2_o_partial_sum < n;
@@ -148,5 +150,6 @@ begin
     r_nxt <= Mx3_o when isSumLessN or isSumLess2N else
              std_logic_vector(UNSIGNED(Mx2_o_partial_sum) - UNSIGNED(twoN));
              
-    
+  -- Output         
+    r <= r_reg;
 end Behavioral;
