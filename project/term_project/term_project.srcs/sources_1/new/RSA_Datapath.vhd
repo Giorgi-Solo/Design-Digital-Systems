@@ -152,6 +152,55 @@ begin
             end if;
         end if;
     end process finish_register;
+    
+    
+  -- ***************************************************************************
+  -- Multiplexe MxC1 (See microarchitecture for RL Binary method)
+  -- This Mux selects between output of register C and output of mod_mult for C.
+  -- Decision is based on the least significant bit of shift register
+  -- ***************************************************************************
+    
+    MxC1_o <= sqMlt_C when shift_register_e(0) = '1' else
+              c_reg;
+    
+  
+  -- ***************************************************************************
+  -- Multiplexe MxC2. (See microarchitecture for RL Binary method)
+  -- This Mux selects between 1 and MxC1_o.
+  -- Decision is based on the input start
+  -- ***************************************************************************
+  
+    c_nxt <= one when start = '1' else
+             MxC1_o;
+             
+             
+  -- ***************************************************************************
+  -- Multiplexe MxP. (See microarchitecture for RL Binary method)
+  -- This Mux selects between M and and output of mod_mult for P.
+  -- Decision is based on the input start
+  -- *************************************************************************** 
+    p_nxt <= m when start = '1' else
+             sqMlt_P;
+             
+  -- ***************************************************************************
+  -- Registers c_reg and p_reg.
+  -- C register stores result of modular multiplications (C*P mod N).
+  -- P register stores result of modular multiplications (P*P mod N).
+  --  When calculation finishes, C holds encrypted/decrypted value
+  -- ***************************************************************************             
+    C_P_registers: process (clk, reset_n) begin
+        if (reset_n = '0') then
+            c_reg <= (others => '0');
+            p_reg <= (others => '0');
+        elsif (clk'event and clk='1') then
+            if (reg_en = '1') then
+                c_reg <= c_nxt;
+                p_reg <= p_nxt;
+            end if;
+        end if;
+    end process C_P_registers;
+    
+ 
   -- Outputs
     c <= c_reg;
     finished <= finished_reg;
