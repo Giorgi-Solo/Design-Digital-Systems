@@ -27,6 +27,7 @@ architecture Behavioral of mod_mult_tb is
     -- Constants
     constant clkPeriod : time := 10ns;
     constant waitTime  : time := 50ns;
+    constant maxVal    : std_logic_vector := x"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
     
     -- posedge clock and negative active reset
     signal clk     : std_logic := '0';
@@ -63,9 +64,9 @@ begin
             
     -- Stimulli
     stimulli:process begin
-        a <= x"0000000000000000000000000000000000000000000000000000000000000003";
-        b <= x"0000000000000000000000000000000000000000000000000000000000000002";
-        n <= x"0000000000000000000000000000000000000000000000000000000000000005";
+        a <= x"8000000000000000000000000000000000000000000000000000000000000000"; --std_logic_vector(UNSIGNED(maxVal) - 1); --x"0000000000000000000000000000000000000000000000000000000000000003";
+        b <= x"8000000000000000000000000000000000000000000000000000000000000000"; --std_logic_vector(UNSIGNED(maxVal) - 1); --x"0000000000000000000000000000000000000000000000000000000000000002";
+        n <= maxVal; --x"0000000000000000000000000000000000000000000000000000000000000005";
         wait for waitTime;
         
         reset_n <= '1';
@@ -74,7 +75,9 @@ begin
         
         reg_en <= '0'; 
        
+        wait for clkPeriod * 256;
         
+        reset_n <= '0';
         wait;
         
     end process stimulli;   
