@@ -152,6 +152,7 @@ begin
         msgout_ready <= '1';
         
         wait for  clkPeriod;
+        wait for 1ns;
         -- Check outputs after result is read
         assert (msgin_ready = '1') and (msgout_valid = '0')
             report "Outputs are not correct after result is read"
