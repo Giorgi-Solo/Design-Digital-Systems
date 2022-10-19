@@ -39,16 +39,17 @@ end mod_mult;
 
 architecture Behavioral of mod_mult is
     
-    signal r_reg, r_nxt : std_logic_vector(255 downto 0);
+    signal r_reg : std_logic_vector(255 downto 0);
+    signal r_nxt : std_logic_vector(257 downto 0);
 --    signal r_reg_shift  : std_logic_vector(255 downto 0); -- r_reg_shift = 2*r_reg
     
     signal shift_reg_A  : std_logic_vector(254 downto 0);
     signal load_reg     : std_logic;
     
     signal Mx1_o                    : std_logic; 
-    signal Mx2_o_partial_sum, Mx3_o : std_logic_vector(255 downto 0);
+    signal Mx2_o_partial_sum, Mx3_o : std_logic_vector(257 downto 0);
     
-    signal twoN, twoR : std_logic_vector(255 downto 0);
+    signal twoN, twoR : std_logic_vector(257 downto 0);
     
     signal isSumLessN, isSumLess2N : boolean;
     
@@ -80,7 +81,7 @@ begin
             if (reg_en = '1') then
                 r_reg <= (others => '0');
             else 
-                r_reg <= r_nxt; -- this is r 
+                r_reg <= r_nxt(255 downto 0); -- this is r 
             end if;
         end if;
     end process r_register;
@@ -114,8 +115,8 @@ begin
       
       
   -- Calculation of 2*N and 2* r
-    twoN <= n(254 downto 0) & '0';
-    twoR <= r_reg(254 downto 0) & '0';    
+    twoN <= '0' & n(255 downto 0) & '0';
+    twoR <= '0' & r_reg(255 downto 0) & '0';    
       
         
   -- ***************************************************************************
@@ -123,11 +124,11 @@ begin
   -- This multiplexer chooses between 2*R and 2*R + b. 
   -- The output is partial sum. Decision is made based on Mx1_o
   -- ***************************************************************************
-    Mx2_o_partial_sum <= std_logic_vector(UNSIGNED(twoR) + UNSIGNED(b)) when Mx1_o = '1' else
+    Mx2_o_partial_sum <= std_logic_vector(UNSIGNED(twoR) + UNSIGNED("00" & b)) when Mx1_o = '1' else
              twoR;
     
   -- Evaluation for select signals for Mx3 and Mx4 (See microarchitecture for Blakley). 
-    isSumLessN  <= Mx2_o_partial_sum < n;
+    isSumLessN  <= Mx2_o_partial_sum < ("00" & n);
     isSumLess2N <= Mx2_o_partial_sum < twoN;
              
         
@@ -137,7 +138,7 @@ begin
   -- Decision is made based on isSumLessN. If isSumLessN=true, select partial sum.
   -- ***************************************************************************   
     Mx3_o <= Mx2_o_partial_sum when isSumLessN else
-             std_logic_vector(UNSIGNED(Mx2_o_partial_sum) - UNSIGNED(n));
+             std_logic_vector(UNSIGNED(Mx2_o_partial_sum) - UNSIGNED("00" & n));
              
              
         
