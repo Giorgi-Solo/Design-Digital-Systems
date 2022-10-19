@@ -127,16 +127,20 @@ begin
         
         a <= std_logic_vector(UNSIGNED(maxVal) - 1); 
         b <= std_logic_vector(UNSIGNED(maxVal) - 1); 
-        n <= maxVal; 
---        start <= '1';
+        n <= maxVal;  
         
---        wait for clkPeriod;
+        wait until reg_en_i = '1'; 
         
---        start <= '0'; 
+        wait for clkPeriod;
         
+        report "ALL TESTS PASSED"
+            severity note;
+            
         wait;
         
     end process stimulli;   
 
-
+    assert not(reg_en_i = '1') or (result = UNSIGNED(r))
+            report "Modular Multiplication doesn't return correct value"
+            severity failure;
 end Behavioral;
