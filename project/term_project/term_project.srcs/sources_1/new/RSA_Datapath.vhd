@@ -145,7 +145,7 @@ begin
         if (reset_n = '0') then
             finished_reg <= '0';
         elsif (clk'event and clk='1') then
-            if (shift_register_e = one) then
+            if ((shift_register_e = one) and (shift_e = '1')) then
                 finished_reg <= '1';
             else 
                 finished_reg <= '0';
