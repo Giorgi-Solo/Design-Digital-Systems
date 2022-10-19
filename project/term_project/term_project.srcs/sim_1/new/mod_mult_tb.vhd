@@ -128,11 +128,11 @@ begin
         a <= std_logic_vector(UNSIGNED(maxVal) - 1); 
         b <= std_logic_vector(UNSIGNED(maxVal) - 1); 
         n <= maxVal; 
-        start <= '1';
+--        start <= '1';
         
-        wait for clkPeriod;
+--        wait for clkPeriod;
         
-        start <= '0'; 
+--        start <= '0'; 
         
         wait;
         
