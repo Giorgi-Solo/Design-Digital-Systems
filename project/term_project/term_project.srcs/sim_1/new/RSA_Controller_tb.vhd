@@ -63,6 +63,11 @@ begin
             
     -- Stimulli
     stimulli:process begin
+        wait for clkPeriod;
+        assert ((msgin_ready = '1') and (start = '0') and (msgout_valid = '0'))
+            report "Controller Reset Test: Reset values are not correct"
+            severity failure;
+            
         wait for waitTime;
         
         reset_n <= '1';
@@ -70,6 +75,10 @@ begin
         msgin_valid  <= '0'; 
         finished     <= '0';
         msgout_ready <= '0';
+         
+        assert ((msgin_ready = '1') and (start = '0') and (msgout_valid = '0'))
+            report "Controller IDLE Test: Output values are not correct in IDLE state after reset"
+            severity failure;
         
         wait for waitTime;
         
@@ -77,18 +86,55 @@ begin
         finished     <= '0';
         msgout_ready <= '0';
         
+        wait for 1ns;        
+        assert ((msgin_ready = '1') and (start = '1') and (msgout_valid = '0'))
+            report "Controller IDLE Test: Output values are not correct in IDLE state after msgin_valid signal is asserted"
+            severity failure;
+        
+        wait for waitTime;
+        
+        assert ((msgin_ready = '0') and (start = '0') and (msgout_valid = '0'))
+            report "Controller BUSY Test: Output values are not correct in BUSY state until calculation is finished"
+            severity failure;
+        
         wait for waitTime;
         
         msgin_valid  <= '0'; 
         finished     <= '1';
         msgout_ready <= '0';
         
+        wait for 1ns;
+        assert ((msgin_ready = '0') and (start = '0') and (msgout_valid = '1'))
+            report "Controller BUSY Test: Output values are not correct in BUSY state after calculation is finished"
+            severity failure;
+        
+        wait for waitTime;
+        
+        assert ((msgin_ready = '0') and (start = '0') and (msgout_valid = '1'))
+            report "Controller BUSY Test: Output values are not correct in BUSY state after calculation is finished and the outside is not ready to read"
+            severity failure;
+            
         wait for waitTime;
         
         msgin_valid  <= '0'; 
         finished     <= '0';
         msgout_ready <= '1';
         
+        wait for 1ns;
+        assert ((msgin_ready = '0') and (start = '0') and (msgout_valid = '1'))
+            report "Controller BUSY Test: Output values are not correct in BUSY state after calculation is finished and the outside is ready to read"
+            severity failure;
+            
+        wait for clkPeriod;
+        
+        assert ((msgin_ready = '1') and (start = '0') and (msgout_valid = '0'))
+            report "Controller IDLE Test: Output values are not correct in IDLE state after calculation is finished and the outside read the result"
+            severity failure;
+        
+        
+        report "ALL TESTS PASSED"
+            severity note;
+            
         wait;
         
     end process stimulli;   

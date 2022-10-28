@@ -46,15 +46,22 @@ entity RSA_Controller is
 end RSA_Controller;
 
 architecture Behavioral of RSA_Controller is
-    type state_type is (IDLE, INITIALIZE, BUSY, FINISH);  -- define states for FSM
+    type state_type is (IDLE,BUSY);  -- define states for FSM
     signal current_state, next_state : state_type;
+    signal finished_r : std_logic;
 begin
     
     -- State transition
     CurrentState: process(clk, reset_n) begin
         if (reset_n = '0') then
             current_state <= IDLE;
+            finished_r    <= '0';
         elsif (clk'event and clk='1') then
+            if(current_state = IDLE) then
+                finished_r <= '0';
+            elsif (finished_r = '0') then
+                finished_r <= finished;
+            end if;
             current_state <= next_state;
         end if;
     end process CurrentState; 
@@ -64,41 +71,29 @@ begin
         case (current_state) is
             when IDLE =>
                 msgin_ready  <= '1'; 
-                start        <= '0';
                 msgout_valid <= '0';
                 
                 if (msgin_valid = '1') then
-                    next_state <= INITIALIZE;
+                    start      <= '1';
+                    next_state <= BUSY;
                 else
+                    start      <= '0';
                     next_state <= IDLE;
                 end if;
-                
-            when INITIALIZE =>
-                msgin_ready  <= '0'; 
-                start        <= '1';
-                msgout_valid <= '0';
-                next_state   <= BUSY;
-            
+              
             when BUSY =>
                 msgin_ready  <= '0'; 
                 start        <= '0';
-                msgout_valid <= '0';
                 
-                if (finished = '1') then
-                    next_state <= FINISH;
-                else
+                if ((finished or finished_r) = '0') then
+                    msgout_valid <= '0';
                     next_state <= BUSY;
-                end if;
-                
-            when FINISH =>
-                msgin_ready  <= '0'; 
-                start        <= '0';
-                msgout_valid <= '1';
-                
-                if (msgout_ready = '1') then
+                elsif (msgout_ready = '0') then
+                    msgout_valid <= '1';
+                    next_state <= BUSY;
+                else 
+                    msgout_valid <= '1';
                     next_state <= IDLE;
-                else
-                    next_state <= FINISH;
                 end if;
                 
             when others =>
