@@ -39,6 +39,9 @@ entity RSA_Controller is
     msgin_valid, msgout_ready  : in  std_logic;
     msgin_ready, msgout_valid  : out std_logic;
     
+    msgout_last : out STD_LOGIC;
+    msgin_last  : in std_logic;
+    
     -- Inputs/Outputs from/to RSA_Core datapath
     finished : in  std_logic;
     start    : out std_logic
@@ -49,6 +52,7 @@ architecture Behavioral of RSA_Controller is
     type state_type is (IDLE,BUSY);  -- define states for FSM
     signal current_state, next_state : state_type;
     signal finished_r : std_logic;
+    signal last_msg_r : std_logic;
 begin
     
     -- State transition
@@ -56,9 +60,11 @@ begin
         if (reset_n = '0') then
             current_state <= IDLE;
             finished_r    <= '0';
+            last_msg_r    <= '0';
         elsif (clk'event and clk='1') then
             if(current_state = IDLE) then
                 finished_r <= '0';
+                last_msg_r <= msgin_last;
             elsif (finished_r = '0') then
                 finished_r <= finished;
             end if;
@@ -72,6 +78,7 @@ begin
             when IDLE =>
                 msgin_ready  <= '1'; 
                 msgout_valid <= '0';
+                msgout_last  <= '0';
                 
                 if (msgin_valid = '1') then
                     start      <= '1';
@@ -87,12 +94,15 @@ begin
                 
                 if ((finished or finished_r) = '0') then
                     msgout_valid <= '0';
+                    msgout_last  <= '0';
                     next_state <= BUSY;
                 elsif (msgout_ready = '0') then
                     msgout_valid <= '1';
+                    msgout_last  <= last_msg_r;
                     next_state <= BUSY;
                 else 
                     msgout_valid <= '1';
+                    msgout_last  <= last_msg_r;
                     next_state <= IDLE;
                 end if;
                 
@@ -100,6 +110,7 @@ begin
                 msgin_ready  <= '1';
                 start        <= '0';
                 msgout_valid <= '0';
+                msgout_last  <= '0';
                 next_state   <= IDLE;
         end case;
     end process NextState_Outputs; 

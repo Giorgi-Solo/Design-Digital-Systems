@@ -20,6 +20,10 @@ entity exponentiation is
 		C_block_size : integer := 256
 	);
 	port (
+	    
+	    msgout_last : out STD_LOGIC;
+		msgin_last  : in std_logic;
+		
 		--input controll
 		valid_in	: in STD_LOGIC;
 		ready_in	: out STD_LOGIC;
@@ -73,10 +77,12 @@ begin
                 reset_n => reset_n,
                 
                 -- Inputs/Outputs from/to modules surrounding RSA_Core
-                msgin_valid => valid_in,
-                msgin_ready => ready_in, 
+                msgin_valid  => valid_in,
+                msgin_ready  => ready_in, 
                 msgout_valid => valid_out,
                 msgout_ready => ready_out,
+                msgout_last  => msgout_last,
+                msgin_last   => msgin_last,
                 
                 -- Inputs/Outputs from/to RSA_Core datapath
                 finished => finished,

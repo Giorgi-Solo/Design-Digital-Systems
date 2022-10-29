@@ -63,6 +63,8 @@ architecture expBehave of exponentiation_tb is
     signal ready_out : std_logic;                        --in  
     signal valid_out : std_logic;                        --out 
     signal result    : std_logic_vector(255 downto 0);   --out 
+    signal msgout_last : STD_LOGIC;
+	signal msgin_last  : std_logic;
 --	signal restart 		: STD_LOGIC;
 
 begin
@@ -76,6 +78,8 @@ begin
                
 	i_exponentiation : entity work.exponentiation
 		port map (
+		    msgout_last => msgout_last,
+		    msgin_last  => msgin_last,
 			message   => message  ,
 			key       => key      ,
 			valid_in  => valid_in ,
@@ -156,7 +160,7 @@ begin
         ready_out <= '1';
         wait for  2*clkPeriod;
         report "ALL TESTS PASSED"
-            severity note;
+            severity failure;
             
         wait;
         

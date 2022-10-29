@@ -73,6 +73,8 @@ begin
 			C_block_size => C_BLOCK_SIZE
 		)
 		port map (
+		    msgout_last => msgout_last,
+		    msgin_last  => msgin_last,
 			message   => msgin_data  ,
 			key       => key_e_d     ,
 			valid_in  => msgin_valid ,
@@ -85,6 +87,6 @@ begin
 			reset_n   => reset_n
 		);
 
-	msgout_last  <= msgin_last;
+--	msgout_last  <= msgin_last and msgout_valid;
 	rsa_status   <= (others => '0');
 end rtl;
