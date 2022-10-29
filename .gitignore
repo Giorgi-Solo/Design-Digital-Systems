@@ -13,4 +13,18 @@ project/term_project/term_project.sim/
 project/term_project/term_project.xpr
 vivado_assignment_5.zip
 *.wcfg
-RSA/*
+# RSA/*
+
+*.cache/*
+*.runs/*
+*.xpr
+*.sim/*
+
+*.hbs/
+*.hw/
+*.ip_user_files/
+*.zip
+*.jou
+*.log
+*.txt
+*.rpt
