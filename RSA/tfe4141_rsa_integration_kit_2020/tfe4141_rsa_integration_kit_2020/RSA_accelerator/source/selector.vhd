@@ -42,12 +42,12 @@ entity selector is
     ready   : in std_logic;
     
     -- Output to RSA_Core datapath
-    id      : out integer --std_logic_vector(counterSize - 1 downto 0)
+    id      : out integer := 0 --std_logic_vector(counterSize - 1 downto 0)
    );
 end selector;
 
 architecture Behavioral of selector is
-    signal counter : integer; --std_logic_vector(counterSize -1 downto 0);
+    signal counter : integer := 0; --std_logic_vector(counterSize -1 downto 0);
 begin
     idSelector: process (clk, reset_n) begin
         if (reset_n = '0') then
