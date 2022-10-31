@@ -28,8 +28,8 @@ use IEEE.NUMERIC_STD.ALL;
 entity selector is
   generic
   (
-    coreNumber   : integer := 4;
-    counterSize  : integer := 2
+    coreNumber   : integer := 8;
+    counterSize  : integer := 3
   );
   Port 
   (
@@ -53,10 +53,12 @@ begin
         if (reset_n = '0') then
             counter <= 0;
         elsif (clk'event and clk='1') then
-            if (counter = (coreNumber - 1)) then
-                counter <= 0;
-            elsif ((valid = '1') and (ready = '1')) then
-                counter <= counter + 1;
+            if ((valid = '1') and (ready = '1')) then
+                if (counter = (coreNumber - 1)) then
+                    counter <= 0;
+                else
+                    counter <= counter + 1;
+                end if; 
             end if;
         end if;
     end process idSelector;

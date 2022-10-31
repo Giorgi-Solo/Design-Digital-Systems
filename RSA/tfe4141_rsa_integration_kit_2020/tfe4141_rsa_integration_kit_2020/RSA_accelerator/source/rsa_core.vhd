@@ -66,8 +66,8 @@ entity rsa_core is
 end rsa_core;
 
 architecture rtl of rsa_core is
-    constant coreNumber  : integer := 2;
-    constant counterSize : integer := 1;
+    constant coreNumber  : integer := 4;
+    constant counterSize : integer := 2;
     
     type DATA_OUT_ARRAY is array (0 to (coreNumber - 1)) of std_logic_vector(C_BLOCK_SIZE-1 downto 0);
         
@@ -88,8 +88,10 @@ begin
     
     msgin_valid_ENCODER: process (msgin_valid, id_ready_core) begin
         case (id_ready_core) is
-        when 0      => valid_in_vec <= "0" & msgin_valid;
-        when 1      => valid_in_vec <= msgin_valid & "0";
+        when 0      => valid_in_vec <= "000" & msgin_valid;
+        when 1      => valid_in_vec <= "00" & msgin_valid & "0";
+        when 2      => valid_in_vec <= "0" & msgin_valid & "00";
+        when 3      => valid_in_vec <= msgin_valid & "000";
         when others => valid_in_vec <= (others => '0');
         end case;
     end process msgin_valid_ENCODER;
@@ -101,8 +103,10 @@ begin
         
     msgout_ready_ENCODER: process (msgout_ready, id_finished_core) begin
         case (id_finished_core) is
-        when 0      => ready_out_vec <= "0" & msgout_ready;
-        when 1      => ready_out_vec <= msgout_ready & "0";
+        when 0      => ready_out_vec <= "000" & msgout_ready;
+        when 1      => ready_out_vec <= "00" & msgout_ready & "0";
+        when 2      => ready_out_vec <= "0" &msgout_ready & "00";
+        when 3      => ready_out_vec <= msgout_ready & "000";
         when others => ready_out_vec <= (others => '0');
         end case;
     end process msgout_ready_ENCODER;
@@ -120,7 +124,7 @@ begin
                 reset_n => reset_n                      ,
                 
                 valid   =>  msgin_valid                 ,
-                ready   =>  ready_in_q(id_ready_core)   ,
+                ready   =>  msgin_ready, --ready_in_q(id_ready_core)   ,
                 
                 id      => id_ready_core
             );
@@ -136,7 +140,7 @@ begin
                 clk     => clk                              ,
                 reset_n => reset_n                          ,
                 
-                valid   =>  valid_out_q(id_finished_core)   ,
+                valid   =>  msgout_valid, --valid_out_q(id_finished_core)   ,
                 ready   =>  msgout_ready                    ,
                 
                 id      => id_finished_core
@@ -179,6 +183,52 @@ begin
 			-- from/to rsa_msgin_regs
 			valid_in    => valid_in_vec(1)   , --msgin_valid ,
 			ready_in    => ready_in_q(1)     , --msgin_ready ,  in queue
+			
+			msgin_last  => msgin_last        ,
+			message     => msgin_data        ,
+			key         => key_e_d           ,
+			modulus     => key_n             ,
+			clk         => clk               ,
+			reset_n     => reset_n
+		);
+			
+	i_exponentiation02 : entity work.exponentiation
+		generic map (
+			C_block_size => C_BLOCK_SIZE
+		)
+		port map (
+            -- from/to rsa_msgout_regs
+		    msgout_last => msgout_last_vec(2), --msgout_last,
+			ready_out   => ready_out_vec(2)  , --msgout_ready,
+			valid_out   => valid_out_q(2)    , --msgout_valid,
+			result      => data_out_arr(2)   , --msgout_data ,
+			
+			-- from/to rsa_msgin_regs
+			valid_in    => valid_in_vec(2)   , --msgin_valid ,
+			ready_in    => ready_in_q(2)     , --msgin_ready ,  in queue
+			
+			msgin_last  => msgin_last        ,
+			message     => msgin_data        ,
+			key         => key_e_d           ,
+			modulus     => key_n             ,
+			clk         => clk               ,
+			reset_n     => reset_n
+		);
+					
+	i_exponentiation03 : entity work.exponentiation
+		generic map (
+			C_block_size => C_BLOCK_SIZE
+		)
+		port map (
+            -- from/to rsa_msgout_regs
+		    msgout_last => msgout_last_vec(3), --msgout_last,
+			ready_out   => ready_out_vec(3)  , --msgout_ready,
+			valid_out   => valid_out_q(3)    , --msgout_valid,
+			result      => data_out_arr(3)   , --msgout_data ,
+			
+			-- from/to rsa_msgin_regs
+			valid_in    => valid_in_vec(3)   , --msgin_valid ,
+			ready_in    => ready_in_q(3)     , --msgin_ready ,  in queue
 			
 			msgin_last  => msgin_last        ,
 			message     => msgin_data        ,
