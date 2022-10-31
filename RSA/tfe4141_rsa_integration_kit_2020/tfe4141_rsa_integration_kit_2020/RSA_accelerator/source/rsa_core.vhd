@@ -88,16 +88,16 @@ begin
     
     msgin_valid_ENCODER: process (msgin_valid, id_ready_core) begin
         case (id_ready_core) is
-        when 0      => valid_in_vec <= "000000000" & msgin_valid;
-        when 1      => valid_in_vec <= "00000000" & msgin_valid & "0";
-        when 2      => valid_in_vec <= "0000000" & msgin_valid & "00";
-        when 3      => valid_in_vec <= "000000" & msgin_valid & "000";
-        when 4      => valid_in_vec <= "00000" & msgin_valid & "0000";
-        when 5      => valid_in_vec <= "0000" & msgin_valid & "00000";
-        when 6      => valid_in_vec <= "000" & msgin_valid & "000000";
-        when 7      => valid_in_vec <= "00" & msgin_valid & "0000000";
-        when 8      => valid_in_vec <= "0" & msgin_valid & "00000000";
-        when 9      => valid_in_vec <= msgin_valid & "000000000";
+        when 0      => valid_in_vec <= (0 => msgin_valid, others => '0');-- "000000000" & msgin_valid;
+        when 1      => valid_in_vec <= (1 => msgin_valid, others => '0');-- "00000000" & msgin_valid & "0";
+        when 2      => valid_in_vec <= (2 => msgin_valid, others => '0');-- "0000000" & msgin_valid & "00";
+        when 3      => valid_in_vec <= (3 => msgin_valid, others => '0');-- "000000" & msgin_valid & "000";
+        when 4      => valid_in_vec <= (4 => msgin_valid, others => '0');-- "00000" & msgin_valid & "0000";
+        when 5      => valid_in_vec <= (5 => msgin_valid, others => '0');-- "0000" & msgin_valid & "00000";
+        when 6      => valid_in_vec <= (6 => msgin_valid, others => '0');-- "000" & msgin_valid & "000000";
+        when 7      => valid_in_vec <= (7 => msgin_valid, others => '0');-- "00" & msgin_valid & "0000000";
+        when 8      => valid_in_vec <= (8 => msgin_valid, others => '0');-- "0" & msgin_valid & "00000000";
+        when 9      => valid_in_vec <= (9 => msgin_valid, others => '0');-- msgin_valid & "000000000";
         when others => valid_in_vec <= (others => '0');
         end case;
     end process msgin_valid_ENCODER;
@@ -109,16 +109,16 @@ begin
         
     msgout_ready_ENCODER: process (msgout_ready, id_finished_core) begin
         case (id_finished_core) is
-        when 0      => ready_out_vec <= "000000000" & msgout_ready;
-        when 1      => ready_out_vec <= "00000000" & msgout_ready & "0";
-        when 2      => ready_out_vec <= "0000000" & msgout_ready & "00";
-        when 3      => ready_out_vec <= "000000" & msgout_ready & "000";
-        when 4      => ready_out_vec <= "00000" & msgout_ready & "0000";
-        when 5      => ready_out_vec <= "0000" & msgout_ready & "00000";
-        when 6      => ready_out_vec <= "000" & msgout_ready & "000000";
-        when 7      => ready_out_vec <= "00" & msgout_ready & "0000000";
-        when 8      => ready_out_vec <= "0" & msgout_ready & "00000000";
-        when 9      => ready_out_vec <= msgout_ready & "000000000";
+        when 0      => ready_out_vec <= (0 => msgout_ready, others => '0');-- "000000000" & msgout_ready;
+        when 1      => ready_out_vec <= (1 => msgout_ready, others => '0');-- "00000000" & msgout_ready & "0";
+        when 2      => ready_out_vec <= (2 => msgout_ready, others => '0');-- "0000000" & msgout_ready & "00";
+        when 3      => ready_out_vec <= (3 => msgout_ready, others => '0');-- "000000" & msgout_ready & "000";
+        when 4      => ready_out_vec <= (4 => msgout_ready, others => '0');-- "00000" & msgout_ready & "0000";
+        when 5      => ready_out_vec <= (5 => msgout_ready, others => '0');-- "0000" & msgout_ready & "00000";
+        when 6      => ready_out_vec <= (6 => msgout_ready, others => '0');-- "000" & msgout_ready & "000000";
+        when 7      => ready_out_vec <= (7 => msgout_ready, others => '0');-- "00" & msgout_ready & "0000000";
+        when 8      => ready_out_vec <= (8 => msgout_ready, others => '0');-- "0" & msgout_ready & "00000000";
+        when 9      => ready_out_vec <= (9 => msgout_ready, others => '0');-- msgout_ready & "000000000";
         when others => ready_out_vec <= (others => '0');
         end case;
     end process msgout_ready_ENCODER;
