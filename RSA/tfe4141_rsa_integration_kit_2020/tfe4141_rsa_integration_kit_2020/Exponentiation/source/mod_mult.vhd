@@ -49,6 +49,8 @@ architecture Behavioral of mod_mult is
     signal Mx1_o                    : std_logic; 
     signal Mx2_o_partial_sum, Mx3_o : std_logic_vector(257 downto 0);
     
+    signal partial_sum_N, partial_sum_2N : std_logic_vector(257 downto 0);
+    
     signal twoN, twoR : std_logic_vector(257 downto 0);
     
     signal isSumLessN, isSumLess2N : boolean;
@@ -128,9 +130,12 @@ begin
              twoR;
     
   -- Evaluation for select signals for Mx3 and Mx4 (See microarchitecture for Blakley). 
-    isSumLessN  <= Mx2_o_partial_sum < ("00" & n);
-    isSumLess2N <= Mx2_o_partial_sum < twoN;
-             
+  
+    isSumLessN  <= partial_sum_N(257)  = '1';
+    isSumLess2N <= partial_sum_2N(257) = '1';
+    
+    partial_sum_N  <= std_logic_vector(UNSIGNED(Mx2_o_partial_sum) - UNSIGNED("00" & n));
+    partial_sum_2N <= std_logic_vector(UNSIGNED(Mx2_o_partial_sum) - UNSIGNED(twoN));
         
   -- ***************************************************************************
   -- Multiplexer 3 - Mx3 (See microarchitecture for Blakley).
@@ -138,7 +143,7 @@ begin
   -- Decision is made based on isSumLessN. If isSumLessN=true, select partial sum.
   -- ***************************************************************************   
     Mx3_o <= Mx2_o_partial_sum when isSumLessN else
-             std_logic_vector(UNSIGNED(Mx2_o_partial_sum) - UNSIGNED("00" & n));
+             partial_sum_N; --std_logic_vector(UNSIGNED(Mx2_o_partial_sum) - UNSIGNED("00" & n));
              
              
         
@@ -149,7 +154,7 @@ begin
   -- If (isSumLessN or isSumLess2N) is true, select Mx3_o.
   -- ***************************************************************************      
     r_nxt <= Mx3_o when isSumLessN or isSumLess2N else
-             std_logic_vector(UNSIGNED(Mx2_o_partial_sum) - UNSIGNED(twoN));
+             partial_sum_2N; --std_logic_vector(UNSIGNED(Mx2_o_partial_sum) - UNSIGNED(twoN));
              
   -- Output         
     r <= r_reg;

@@ -73,7 +73,7 @@ begin
     end process CurrentState; 
     
     -- Logic for next_state and output
-    NextState_Outputs: process(current_state, msgin_valid, finished, finished_r, msgout_ready) begin
+    NextState_Outputs: process(current_state, msgin_valid, finished, finished_r, last_msg_r, msgout_ready) begin
         case (current_state) is
             when IDLE =>
                 msgin_ready  <= '1'; 
