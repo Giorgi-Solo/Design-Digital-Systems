@@ -134,7 +134,7 @@ begin
         wait for clkPeriod;
         
         report "ALL TESTS PASSED"
-            severity note;
+            severity failure;
             
         wait;
         
