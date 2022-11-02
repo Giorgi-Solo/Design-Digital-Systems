@@ -33,3 +33,4 @@ vivado_assignment_5.zip
 *.xml
 *.bd
 *.bxml
+*.xdc
