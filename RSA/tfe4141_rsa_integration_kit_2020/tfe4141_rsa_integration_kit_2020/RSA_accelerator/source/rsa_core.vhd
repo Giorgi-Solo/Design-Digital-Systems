@@ -66,7 +66,7 @@ entity rsa_core is
 end rsa_core;
 
 architecture rtl of rsa_core is
-    constant coreNumber  : integer := 1;
+    constant coreNumber  : integer := 10;
     constant counterSize : integer := 2;
     
     type DATA_OUT_ARRAY is array (0 to (coreNumber - 1)) of std_logic_vector(31 downto 0);
@@ -89,15 +89,15 @@ begin
     msgin_valid_ENCODER: process (msgin_valid, id_ready_core) begin
         case (id_ready_core) is
         when 0      => valid_in_vec <= (0 => msgin_valid, others => '0');-- "000000000" & msgin_valid;
---        when 1      => valid_in_vec <= (1 => msgin_valid, others => '0');-- "00000000" & msgin_valid & "0";
---        when 2      => valid_in_vec <= (2 => msgin_valid, others => '0');-- "0000000" & msgin_valid & "00";
---        when 3      => valid_in_vec <= (3 => msgin_valid, others => '0');-- "000000" & msgin_valid & "000";
---        when 4      => valid_in_vec <= (4 => msgin_valid, others => '0');-- "00000" & msgin_valid & "0000";
---        when 5      => valid_in_vec <= (5 => msgin_valid, others => '0');-- "0000" & msgin_valid & "00000";
---        when 6      => valid_in_vec <= (6 => msgin_valid, others => '0');-- "000" & msgin_valid & "000000";
---        when 7      => valid_in_vec <= (7 => msgin_valid, others => '0');-- "00" & msgin_valid & "0000000";
---        when 8      => valid_in_vec <= (8 => msgin_valid, others => '0');-- "0" & msgin_valid & "00000000";
---        when 9      => valid_in_vec <= (9 => msgin_valid, others => '0');-- msgin_valid & "000000000";
+        when 1      => valid_in_vec <= (1 => msgin_valid, others => '0');-- "00000000" & msgin_valid & "0";
+        when 2      => valid_in_vec <= (2 => msgin_valid, others => '0');-- "0000000" & msgin_valid & "00";
+        when 3      => valid_in_vec <= (3 => msgin_valid, others => '0');-- "000000" & msgin_valid & "000";
+        when 4      => valid_in_vec <= (4 => msgin_valid, others => '0');-- "00000" & msgin_valid & "0000";
+        when 5      => valid_in_vec <= (5 => msgin_valid, others => '0');-- "0000" & msgin_valid & "00000";
+        when 6      => valid_in_vec <= (6 => msgin_valid, others => '0');-- "000" & msgin_valid & "000000";
+        when 7      => valid_in_vec <= (7 => msgin_valid, others => '0');-- "00" & msgin_valid & "0000000";
+        when 8      => valid_in_vec <= (8 => msgin_valid, others => '0');-- "0" & msgin_valid & "00000000";
+        when 9      => valid_in_vec <= (9 => msgin_valid, others => '0');-- msgin_valid & "000000000";
         when others => valid_in_vec <= (others => '0');
         end case;
     end process msgin_valid_ENCODER;
@@ -121,15 +121,15 @@ begin
     msgout_ready_ENCODER: process (msgout_ready, id_finished_core) begin
         case (id_finished_core) is
         when 0      => ready_out_vec <= (0 => msgout_ready, others => '0');-- "000000000" & msgout_ready;
---        when 1      => ready_out_vec <= (1 => msgout_ready, others => '0');-- "00000000" & msgout_ready & "0";
---        when 2      => ready_out_vec <= (2 => msgout_ready, others => '0');-- "0000000" & msgout_ready & "00";
---        when 3      => ready_out_vec <= (3 => msgout_ready, others => '0');-- "000000" & msgout_ready & "000";
---        when 4      => ready_out_vec <= (4 => msgout_ready, others => '0');-- "00000" & msgout_ready & "0000";
---        when 5      => ready_out_vec <= (5 => msgout_ready, others => '0');-- "0000" & msgout_ready & "00000";
---        when 6      => ready_out_vec <= (6 => msgout_ready, others => '0');-- "000" & msgout_ready & "000000";
---        when 7      => ready_out_vec <= (7 => msgout_ready, others => '0');-- "00" & msgout_ready & "0000000";
---        when 8      => ready_out_vec <= (8 => msgout_ready, others => '0');-- "0" & msgout_ready & "00000000";
---        when 9      => ready_out_vec <= (9 => msgout_ready, others => '0');-- msgout_ready & "000000000";
+        when 1      => ready_out_vec <= (1 => msgout_ready, others => '0');-- "00000000" & msgout_ready & "0";
+        when 2      => ready_out_vec <= (2 => msgout_ready, others => '0');-- "0000000" & msgout_ready & "00";
+        when 3      => ready_out_vec <= (3 => msgout_ready, others => '0');-- "000000" & msgout_ready & "000";
+        when 4      => ready_out_vec <= (4 => msgout_ready, others => '0');-- "00000" & msgout_ready & "0000";
+        when 5      => ready_out_vec <= (5 => msgout_ready, others => '0');-- "0000" & msgout_ready & "00000";
+        when 6      => ready_out_vec <= (6 => msgout_ready, others => '0');-- "000" & msgout_ready & "000000";
+        when 7      => ready_out_vec <= (7 => msgout_ready, others => '0');-- "00" & msgout_ready & "0000000";
+        when 8      => ready_out_vec <= (8 => msgout_ready, others => '0');-- "0" & msgout_ready & "00000000";
+        when 9      => ready_out_vec <= (9 => msgout_ready, others => '0');-- msgout_ready & "000000000";
         when others => ready_out_vec <= (others => '0');
         end case;
     end process msgout_ready_ENCODER;
@@ -192,212 +192,212 @@ begin
 			reset_n     => reset_n
 		);
 	
---	i_exponentiation01 : entity work.exponentiation
---		generic map (
---			C_block_size => C_BLOCK_SIZE
---		)
---		port map (
---            -- from/to rsa_msgout_regs
---		    msgout_last => msgout_last_vec(1), --msgout_last,
---			ready_out   => ready_out_vec(1)  , --msgout_ready,
---			valid_out   => valid_out_q(1)    , --msgout_valid,
---			result      => data_out_arr(1)   , --msgout_data ,
+	i_exponentiation01 : entity work.exponentiation
+		generic map (
+			C_block_size => C_BLOCK_SIZE
+		)
+		port map (
+            -- from/to rsa_msgout_regs
+		    msgout_last => msgout_last_vec(1), --msgout_last,
+			ready_out   => ready_out_vec(1)  , --msgout_ready,
+			valid_out   => valid_out_q(1)    , --msgout_valid,
+			result      => data_out_arr(1)   , --msgout_data ,
 			
---			-- from/to rsa_msgin_regs
---			valid_in    => valid_in_vec(1)   , --msgin_valid ,
---			ready_in    => ready_in_q(1)     , --msgin_ready ,  in queue
+			-- from/to rsa_msgin_regs
+			valid_in    => valid_in_vec(1)   , --msgin_valid ,
+			ready_in    => ready_in_q(1)     , --msgin_ready ,  in queue
 			
---			msgin_last  => msgin_last        ,
---			message     => msgin_data        ,
---			key         => key_e_d           ,
---			modulus     => key_n             ,
---			clk         => clk               ,
---			reset_n     => reset_n
---		);
+			msgin_last  => msgin_last        ,
+			message     => msgin_data        ,
+			key         => key_e_d           ,
+			modulus     => key_n             ,
+			clk         => clk               ,
+			reset_n     => reset_n
+		);
 			
---	i_exponentiation02 : entity work.exponentiation
---		generic map (
---			C_block_size => C_BLOCK_SIZE
---		)
---		port map (
---            -- from/to rsa_msgout_regs
---		    msgout_last => msgout_last_vec(2), --msgout_last,
---			ready_out   => ready_out_vec(2)  , --msgout_ready,
---			valid_out   => valid_out_q(2)    , --msgout_valid,
---			result      => data_out_arr(2)   , --msgout_data ,
+	i_exponentiation02 : entity work.exponentiation
+		generic map (
+			C_block_size => C_BLOCK_SIZE
+		)
+		port map (
+            -- from/to rsa_msgout_regs
+		    msgout_last => msgout_last_vec(2), --msgout_last,
+			ready_out   => ready_out_vec(2)  , --msgout_ready,
+			valid_out   => valid_out_q(2)    , --msgout_valid,
+			result      => data_out_arr(2)   , --msgout_data ,
 			
---			-- from/to rsa_msgin_regs
---			valid_in    => valid_in_vec(2)   , --msgin_valid ,
---			ready_in    => ready_in_q(2)     , --msgin_ready ,  in queue
+			-- from/to rsa_msgin_regs
+			valid_in    => valid_in_vec(2)   , --msgin_valid ,
+			ready_in    => ready_in_q(2)     , --msgin_ready ,  in queue
 			
---			msgin_last  => msgin_last        ,
---			message     => msgin_data        ,
---			key         => key_e_d           ,
---			modulus     => key_n             ,
---			clk         => clk               ,
---			reset_n     => reset_n
---		);
+			msgin_last  => msgin_last        ,
+			message     => msgin_data        ,
+			key         => key_e_d           ,
+			modulus     => key_n             ,
+			clk         => clk               ,
+			reset_n     => reset_n
+		);
 					
---	i_exponentiation03 : entity work.exponentiation
---		generic map (
---			C_block_size => C_BLOCK_SIZE
---		)
---		port map (
---            -- from/to rsa_msgout_regs
---		    msgout_last => msgout_last_vec(3), --msgout_last,
---			ready_out   => ready_out_vec(3)  , --msgout_ready,
---			valid_out   => valid_out_q(3)    , --msgout_valid,
---			result      => data_out_arr(3)   , --msgout_data ,
+	i_exponentiation03 : entity work.exponentiation
+		generic map (
+			C_block_size => C_BLOCK_SIZE
+		)
+		port map (
+            -- from/to rsa_msgout_regs
+		    msgout_last => msgout_last_vec(3), --msgout_last,
+			ready_out   => ready_out_vec(3)  , --msgout_ready,
+			valid_out   => valid_out_q(3)    , --msgout_valid,
+			result      => data_out_arr(3)   , --msgout_data ,
 			
---			-- from/to rsa_msgin_regs
---			valid_in    => valid_in_vec(3)   , --msgin_valid ,
---			ready_in    => ready_in_q(3)     , --msgin_ready ,  in queue
+			-- from/to rsa_msgin_regs
+			valid_in    => valid_in_vec(3)   , --msgin_valid ,
+			ready_in    => ready_in_q(3)     , --msgin_ready ,  in queue
 			
---			msgin_last  => msgin_last        ,
---			message     => msgin_data        ,
---			key         => key_e_d           ,
---			modulus     => key_n             ,
---			clk         => clk               ,
---			reset_n     => reset_n
---		);
+			msgin_last  => msgin_last        ,
+			message     => msgin_data        ,
+			key         => key_e_d           ,
+			modulus     => key_n             ,
+			clk         => clk               ,
+			reset_n     => reset_n
+		);
 						
---	i_exponentiation04 : entity work.exponentiation
---		generic map (
---			C_block_size => C_BLOCK_SIZE
---		)
---		port map (
---            -- from/to rsa_msgout_regs
---		    msgout_last => msgout_last_vec(4), --msgout_last,
---			ready_out   => ready_out_vec(4)  , --msgout_ready,
---			valid_out   => valid_out_q(4)    , --msgout_valid,
---			result      => data_out_arr(4)   , --msgout_data ,
+	i_exponentiation04 : entity work.exponentiation
+		generic map (
+			C_block_size => C_BLOCK_SIZE
+		)
+		port map (
+            -- from/to rsa_msgout_regs
+		    msgout_last => msgout_last_vec(4), --msgout_last,
+			ready_out   => ready_out_vec(4)  , --msgout_ready,
+			valid_out   => valid_out_q(4)    , --msgout_valid,
+			result      => data_out_arr(4)   , --msgout_data ,
 			
---			-- from/to rsa_msgin_regs
---			valid_in    => valid_in_vec(4)   , --msgin_valid ,
---			ready_in    => ready_in_q(4)     , --msgin_ready ,  in queue
+			-- from/to rsa_msgin_regs
+			valid_in    => valid_in_vec(4)   , --msgin_valid ,
+			ready_in    => ready_in_q(4)     , --msgin_ready ,  in queue
 			
---			msgin_last  => msgin_last        ,
---			message     => msgin_data        ,
---			key         => key_e_d           ,
---			modulus     => key_n             ,
---			clk         => clk               ,
---			reset_n     => reset_n
---		);
+			msgin_last  => msgin_last        ,
+			message     => msgin_data        ,
+			key         => key_e_d           ,
+			modulus     => key_n             ,
+			clk         => clk               ,
+			reset_n     => reset_n
+		);
 								
---	i_exponentiation05 : entity work.exponentiation
---		generic map (
---			C_block_size => C_BLOCK_SIZE
---		)
---		port map (
---            -- from/to rsa_msgout_regs
---		    msgout_last => msgout_last_vec(5), --msgout_last,
---			ready_out   => ready_out_vec(5)  , --msgout_ready,
---			valid_out   => valid_out_q(5)    , --msgout_valid,
---			result      => data_out_arr(5)   , --msgout_data ,
+	i_exponentiation05 : entity work.exponentiation
+		generic map (
+			C_block_size => C_BLOCK_SIZE
+		)
+		port map (
+            -- from/to rsa_msgout_regs
+		    msgout_last => msgout_last_vec(5), --msgout_last,
+			ready_out   => ready_out_vec(5)  , --msgout_ready,
+			valid_out   => valid_out_q(5)    , --msgout_valid,
+			result      => data_out_arr(5)   , --msgout_data ,
 			
---			-- from/to rsa_msgin_regs
---			valid_in    => valid_in_vec(5)   , --msgin_valid ,
---			ready_in    => ready_in_q(5)     , --msgin_ready ,  in queue
+			-- from/to rsa_msgin_regs
+			valid_in    => valid_in_vec(5)   , --msgin_valid ,
+			ready_in    => ready_in_q(5)     , --msgin_ready ,  in queue
 			
---			msgin_last  => msgin_last        ,
---			message     => msgin_data        ,
---			key         => key_e_d           ,
---			modulus     => key_n             ,
---			clk         => clk               ,
---			reset_n     => reset_n
---		);
+			msgin_last  => msgin_last        ,
+			message     => msgin_data        ,
+			key         => key_e_d           ,
+			modulus     => key_n             ,
+			clk         => clk               ,
+			reset_n     => reset_n
+		);
 										
---	i_exponentiation06 : entity work.exponentiation
---		generic map (
---			C_block_size => C_BLOCK_SIZE
---		)
---		port map (
---            -- from/to rsa_msgout_regs
---		    msgout_last => msgout_last_vec(6), --msgout_last,
---			ready_out   => ready_out_vec(6)  , --msgout_ready,
---			valid_out   => valid_out_q(6)    , --msgout_valid,
---			result      => data_out_arr(6)   , --msgout_data ,
+	i_exponentiation06 : entity work.exponentiation
+		generic map (
+			C_block_size => C_BLOCK_SIZE
+		)
+		port map (
+            -- from/to rsa_msgout_regs
+		    msgout_last => msgout_last_vec(6), --msgout_last,
+			ready_out   => ready_out_vec(6)  , --msgout_ready,
+			valid_out   => valid_out_q(6)    , --msgout_valid,
+			result      => data_out_arr(6)   , --msgout_data ,
 			
---			-- from/to rsa_msgin_regs
---			valid_in    => valid_in_vec(6)   , --msgin_valid ,
---			ready_in    => ready_in_q(6)     , --msgin_ready ,  in queue
+			-- from/to rsa_msgin_regs
+			valid_in    => valid_in_vec(6)   , --msgin_valid ,
+			ready_in    => ready_in_q(6)     , --msgin_ready ,  in queue
 			
---			msgin_last  => msgin_last        ,
---			message     => msgin_data        ,
---			key         => key_e_d           ,
---			modulus     => key_n             ,
---			clk         => clk               ,
---			reset_n     => reset_n
---		);
+			msgin_last  => msgin_last        ,
+			message     => msgin_data        ,
+			key         => key_e_d           ,
+			modulus     => key_n             ,
+			clk         => clk               ,
+			reset_n     => reset_n
+		);
 											
---	i_exponentiation07 : entity work.exponentiation
---		generic map (
---			C_block_size => C_BLOCK_SIZE
---		)
---		port map (
---            -- from/to rsa_msgout_regs
---		    msgout_last => msgout_last_vec(7), --msgout_last,
---			ready_out   => ready_out_vec(7)  , --msgout_ready,
---			valid_out   => valid_out_q(7)    , --msgout_valid,
---			result      => data_out_arr(7)   , --msgout_data ,
+	i_exponentiation07 : entity work.exponentiation
+		generic map (
+			C_block_size => C_BLOCK_SIZE
+		)
+		port map (
+            -- from/to rsa_msgout_regs
+		    msgout_last => msgout_last_vec(7), --msgout_last,
+			ready_out   => ready_out_vec(7)  , --msgout_ready,
+			valid_out   => valid_out_q(7)    , --msgout_valid,
+			result      => data_out_arr(7)   , --msgout_data ,
 			
---			-- from/to rsa_msgin_regs
---			valid_in    => valid_in_vec(7)   , --msgin_valid ,
---			ready_in    => ready_in_q(7)     , --msgin_ready ,  in queue
+			-- from/to rsa_msgin_regs
+			valid_in    => valid_in_vec(7)   , --msgin_valid ,
+			ready_in    => ready_in_q(7)     , --msgin_ready ,  in queue
 			
---			msgin_last  => msgin_last        ,
---			message     => msgin_data        ,
---			key         => key_e_d           ,
---			modulus     => key_n             ,
---			clk         => clk               ,
---			reset_n     => reset_n
---		);
+			msgin_last  => msgin_last        ,
+			message     => msgin_data        ,
+			key         => key_e_d           ,
+			modulus     => key_n             ,
+			clk         => clk               ,
+			reset_n     => reset_n
+		);
 												
---	i_exponentiation08 : entity work.exponentiation
---		generic map (
---			C_block_size => C_BLOCK_SIZE
---		)
---		port map (
---            -- from/to rsa_msgout_regs
---		    msgout_last => msgout_last_vec(8), --msgout_last,
---			ready_out   => ready_out_vec(8)  , --msgout_ready,
---			valid_out   => valid_out_q(8)    , --msgout_valid,
---			result      => data_out_arr(8)   , --msgout_data ,
+	i_exponentiation08 : entity work.exponentiation
+		generic map (
+			C_block_size => C_BLOCK_SIZE
+		)
+		port map (
+            -- from/to rsa_msgout_regs
+		    msgout_last => msgout_last_vec(8), --msgout_last,
+			ready_out   => ready_out_vec(8)  , --msgout_ready,
+			valid_out   => valid_out_q(8)    , --msgout_valid,
+			result      => data_out_arr(8)   , --msgout_data ,
 			
---			-- from/to rsa_msgin_regs
---			valid_in    => valid_in_vec(8)   , --msgin_valid ,
---			ready_in    => ready_in_q(8)     , --msgin_ready ,  in queue
+			-- from/to rsa_msgin_regs
+			valid_in    => valid_in_vec(8)   , --msgin_valid ,
+			ready_in    => ready_in_q(8)     , --msgin_ready ,  in queue
 			
---			msgin_last  => msgin_last        ,
---			message     => msgin_data        ,
---			key         => key_e_d           ,
---			modulus     => key_n             ,
---			clk         => clk               ,
---			reset_n     => reset_n
---		);
+			msgin_last  => msgin_last        ,
+			message     => msgin_data        ,
+			key         => key_e_d           ,
+			modulus     => key_n             ,
+			clk         => clk               ,
+			reset_n     => reset_n
+		);
 		
---	i_exponentiation09 : entity work.exponentiation
---		generic map (
---			C_block_size => C_BLOCK_SIZE
---		)
---		port map (
---            -- from/to rsa_msgout_regs
---		    msgout_last => msgout_last_vec(9), --msgout_last,
---			ready_out   => ready_out_vec(9)  , --msgout_ready,
---			valid_out   => valid_out_q(9)    , --msgout_valid,
---			result      => data_out_arr(9)   , --msgout_data ,
+	i_exponentiation09 : entity work.exponentiation
+		generic map (
+			C_block_size => C_BLOCK_SIZE
+		)
+		port map (
+            -- from/to rsa_msgout_regs
+		    msgout_last => msgout_last_vec(9), --msgout_last,
+			ready_out   => ready_out_vec(9)  , --msgout_ready,
+			valid_out   => valid_out_q(9)    , --msgout_valid,
+			result      => data_out_arr(9)   , --msgout_data ,
 			
---			-- from/to rsa_msgin_regs
---			valid_in    => valid_in_vec(9)   , --msgin_valid ,
---			ready_in    => ready_in_q(9)     , --msgin_ready ,  in queue
+			-- from/to rsa_msgin_regs
+			valid_in    => valid_in_vec(9)   , --msgin_valid ,
+			ready_in    => ready_in_q(9)     , --msgin_ready ,  in queue
 			
---			msgin_last  => msgin_last        ,
---			message     => msgin_data        ,
---			key         => key_e_d           ,
---			modulus     => key_n             ,
---			clk         => clk               ,
---			reset_n     => reset_n
---		);
+			msgin_last  => msgin_last        ,
+			message     => msgin_data        ,
+			key         => key_e_d           ,
+			modulus     => key_n             ,
+			clk         => clk               ,
+			reset_n     => reset_n
+		);
 
 	rsa_status   <= (others => '0');
 end rtl;
