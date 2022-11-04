@@ -66,7 +66,8 @@ architecture expBehave of exponentiation_tb is
     signal msgout_last : STD_LOGIC;
 	signal msgin_last  : std_logic;
 --	signal restart 		: STD_LOGIC;
-
+    
+    signal result_internal : std_logic_vector(31 downto 0);
 begin
 
     -- Clock generation
@@ -76,6 +77,17 @@ begin
     
     isCorrect <= (correctResult = UNSIGNED(result)) and (valid_out = '1');-- when reg_en_i = '1' else
                
+ 
+    process (clk, reset_n) begin
+        if (reset_n = '0') then
+            result <= (others => '0');
+        elsif (clk'event and clk='1') then
+            if (valid_out = '0') then
+                result <= result_internal & result(255 downto 32);
+            end if;
+        end if;
+    end process;
+    	
 	i_exponentiation : entity work.exponentiation
 		port map (
 		    msgout_last => msgout_last,
@@ -86,7 +98,7 @@ begin
 			ready_in  => ready_in ,
 			ready_out => ready_out,
 			valid_out => valid_out,
-			result    => result   ,
+			result    => result_internal   ,
 			modulus   => modulus  ,
 			clk       => clk      ,
 			reset_n   => reset_n
@@ -134,20 +146,21 @@ begin
 --        message <= x"0000000000000000000000000000000000000000000000000000000000000002";
         
        
-        wait until valid_out = '1';
+--        wait until valid_out = '1';
         
         
-        wait for  waitTime;
-        -- Inputs from rsa_msgout
-        ready_out <= '0';
+--        wait for  waitTime;
+--        -- Inputs from rsa_msgout
+--        ready_out <= '0';
         
-        assert valid_out = '1'
-            report "Does not hold correctResult value until outside is ready to read it"
-            severity failure;
+--        assert valid_out = '1'
+--            report "Does not hold correctResult value until outside is ready to read it"
+--            severity failure;
             
         wait for  clkPeriod;
         -- Inputs from rsa_msgout
         ready_out <= '1';
+        wait until valid_out = '1';
         
         wait for  clkPeriod;
         wait for 1ns;
