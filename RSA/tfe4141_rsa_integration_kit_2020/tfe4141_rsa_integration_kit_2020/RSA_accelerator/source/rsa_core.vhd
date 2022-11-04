@@ -69,7 +69,7 @@ architecture rtl of rsa_core is
     constant coreNumber  : integer := 1;
     constant counterSize : integer := 2;
     
-    type DATA_OUT_ARRAY is array (0 to (coreNumber - 1)) of std_logic_vector(C_BLOCK_SIZE-1 downto 0);
+    type DATA_OUT_ARRAY is array (0 to (coreNumber - 1)) of std_logic_vector(31 downto 0);
         
     signal ready_in_q  : std_logic_vector((coreNumber - 1) downto 0);  -- queue of cores that are ready to start calculation
     signal valid_out_q : std_logic_vector((coreNumber - 1) downto 0);  -- queue of cores that finished the calculation
@@ -105,7 +105,18 @@ begin
     -- msgout interface mux and encoder
     msgout_valid <= valid_out_q(id_finished_core);
     msgout_last  <= msgout_last_vec(id_finished_core);
-    msgout_data  <= data_out_arr(id_finished_core);
+    
+--    msgout_data  <= data_out_arr(id_finished_core);
+    
+    process (clk, reset_n) begin
+        if (reset_n = '0') then
+            msgout_data <= (others => '0');
+        elsif (clk'event and clk='1') then
+            if (valid_out_q(id_finished_core) = '0') then
+                msgout_data <= data_out_arr(id_finished_core) & msgout_data(255 downto 32);
+            end if;
+        end if;
+    end process;
         
     msgout_ready_ENCODER: process (msgout_ready, id_finished_core) begin
         case (id_finished_core) is
