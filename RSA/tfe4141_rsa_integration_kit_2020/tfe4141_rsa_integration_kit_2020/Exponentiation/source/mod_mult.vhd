@@ -40,7 +40,7 @@ end mod_mult;
 architecture Behavioral of mod_mult is
     
     signal r_reg : std_logic_vector(255 downto 0);
-    signal r_nxt : std_logic_vector(257 downto 0);
+    signal r_nxt : std_logic_vector(255 downto 0);
 --    signal r_reg_shift  : std_logic_vector(255 downto 0); -- r_reg_shift = 2*r_reg
     
     signal shift_reg_A  : std_logic_vector(254 downto 0);
@@ -85,7 +85,7 @@ begin
             if (reg_en = '1') then
                 r_reg <= (others => '0');
             else 
-                r_reg <= r_nxt(255 downto 0); -- this is r 
+                r_reg <= r_nxt; -- this is r 
             end if;
         end if;
     end process r_register;
@@ -155,9 +155,9 @@ begin
     
     R_NXT_MUX: process(r_nxt_sel, Mx2_o_partial_sum, partial_sum_N, partial_sum_2N) begin
         case(r_nxt_sel) is
-            when "011"  => r_nxt <= Mx2_o_partial_sum;
-            when "001"  => r_nxt <= partial_sum_N;
-            when "000"  => r_nxt <= partial_sum_2N;
+            when "011"  => r_nxt <= Mx2_o_partial_sum(255 downto 0);
+            when "001"  => r_nxt <= partial_sum_N(255 downto 0);
+            when "000"  => r_nxt <= partial_sum_2N(255 downto 0);
             when others => r_nxt <= (others => '0');
         end case;
     end process R_NXT_MUX;
