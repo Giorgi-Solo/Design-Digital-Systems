@@ -46,14 +46,16 @@ architecture Behavioral of mod_mult is
     signal shift_reg_A  : std_logic_vector(254 downto 0);
     signal load_reg     : std_logic;
     
-    signal Mx1_o                    : std_logic; 
-    signal Mx2_o_partial_sum, Mx3_o : std_logic_vector(257 downto 0);
+    signal Mx1_o             : std_logic; 
+    signal Mx2_o_partial_sum : std_logic_vector(257 downto 0);
+    
+    signal r_nxt_sel   : std_logic_vector(2 downto 0);
     
     signal partial_sum_N, partial_sum_2N : std_logic_vector(257 downto 0);
     
     signal twoN, twoR : std_logic_vector(257 downto 0);
     
-    signal isSumLessN, isSumLess2N : boolean;
+    signal isSumLessN, isSumLess2N : std_logic;
     
 begin
 
@@ -129,33 +131,37 @@ begin
     Mx2_o_partial_sum <= std_logic_vector(UNSIGNED(twoR) + UNSIGNED("00" & b)) when Mx1_o = '1' else
              twoR;
     
-  -- Evaluation for select signals for Mx3 and Mx4 (See microarchitecture for Blakley). 
+  -- Evaluation for select signals for R_nxt multiplexer (See microarchitecture for Blakley). 
   
-    isSumLessN  <= partial_sum_N(257)  = '1';
-    isSumLess2N <= partial_sum_2N(257) = '1';
+    isSumLessN  <= partial_sum_N(257);
+    isSumLess2N <= partial_sum_2N(257);
     
+    r_nxt_sel   <= reg_en & isSumLessN & isSumLess2N;
+    
+  -- Evaluation of partial sum - N and partial sum - 2N (See microarchitecture for Blakley). 
+  
     partial_sum_N  <= std_logic_vector(UNSIGNED(Mx2_o_partial_sum) - UNSIGNED("00" & n));
     partial_sum_2N <= std_logic_vector(UNSIGNED(Mx2_o_partial_sum) - UNSIGNED(twoN));
-        
+    
   -- ***************************************************************************
-  -- Multiplexer 3 - Mx3 (See microarchitecture for Blakley).
-  -- This multiplexer chooses between Mx2_o_partial_sum and Mx2_o_partial_sum - n. 
-  -- Decision is made based on isSumLessN. If isSumLessN=true, select partial sum.
-  -- ***************************************************************************   
-    Mx3_o <= Mx2_o_partial_sum when isSumLessN else
-             partial_sum_N; --std_logic_vector(UNSIGNED(Mx2_o_partial_sum) - UNSIGNED("00" & n));
-             
-             
+  -- Multiplexer for R_nxt (See microarchitecture for Blakley).
+  -- This multiplexer chooses between 
+  --                                  Mx2_o_partial_sum, 
+  --                                  Mx2_o_partial_sum - n.  
+  --                                  Mx2_o_partial_sum - 2n, 
+  --                                  0. 
+  -- Decision is made based on concatenation of reg_en, isSumLessN, isSumLess2N.
+  -- ***************************************************************************     
+    
+    R_NXT_MUX: process(r_nxt_sel, Mx2_o_partial_sum, partial_sum_N, partial_sum_2N) begin
+        case(r_nxt_sel) is
+            when "011"  => r_nxt <= Mx2_o_partial_sum;
+            when "001"  => r_nxt <= partial_sum_N;
+            when "000"  => r_nxt <= partial_sum_2N;
+            when others => r_nxt <= (others => '0');
+        end case;
+    end process R_NXT_MUX;
         
-  -- ***************************************************************************
-  -- Multiplexer 4 - Mx4 (See microarchitecture for Blakley).
-  -- This multiplexer chooses between Mx3_o and Mx2_o_partial_sum - 2n. 
-  -- Decision is made based on isSumLessN or isSumLess2N.
-  -- If (isSumLessN or isSumLess2N) is true, select Mx3_o.
-  -- ***************************************************************************      
-    r_nxt <= Mx3_o when isSumLessN or isSumLess2N else
-             partial_sum_2N; --std_logic_vector(UNSIGNED(Mx2_o_partial_sum) - UNSIGNED(twoN));
-             
   -- Output         
     r <= r_reg;
 end Behavioral;
