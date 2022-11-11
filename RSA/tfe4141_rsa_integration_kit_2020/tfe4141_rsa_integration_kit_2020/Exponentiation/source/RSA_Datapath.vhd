@@ -37,7 +37,7 @@ end RSA_Datapath;
 
 architecture Behavioral of RSA_Datapath is
   -- signals associated with shift register
-    signal load_e, shift_e, finish_r : std_logic;
+    signal load_e, shift_e, finish_r, sel : std_logic;
     
   -- outputs of multiplexers in front of register C (See microarchitecture for RL Binary Method)
     signal MxC1_o : std_logic_vector(255 downto 0);
@@ -46,7 +46,11 @@ architecture Behavioral of RSA_Datapath is
     signal c_nxt, p_nxt : std_logic_vector(255 downto 0);
     
   -- the output of modular multiplication for register C and register P
-    signal sqMlt_C, sqMlt_P : std_logic_vector(255 downto 0);
+    signal sqMlt_C, sqMlt_P, sqMlt: std_logic_vector(255 downto 0);
+    
+  -- signals associated with A_mux
+    signal A_mux_sel, A_mux_sel_r : std_logic;
+    signal A_mux_o                : std_logic_vector(255 downto 0);
     
   -- output from counter  
     signal reg_en_i : std_logic;
@@ -78,46 +82,53 @@ begin
                 reg_en_i => reg_en_i   
             );
             
-    modular_multiplication_C: entity work.mod_mult
+    modular_multiplication: entity work.mod_mult
         port map
             (
                 clk => clk,
                 reset_n => reset_n,
                 
                 -- Inputs
-                a => c_reg,
+                a => A_mux_o,
                 b => p_reg, 
                 n => key_n,
                 
                 reg_en => reg_en,
 --                a255b  => c255b,
                 -- Output 
-                r => sqMlt_C
+                r => sqMlt
             );
      
-    modular_multiplication_P: entity work.mod_mult
-        port map
-            (
-                clk => clk,
-                reset_n => reset_n,
-                
-                -- Inputs
-                a => p_reg,
-                b => p_reg, 
-                n => key_n,
---                a255b  => p255b,
-                reg_en => reg_en,
-                
-                -- Output 
-                r => sqMlt_P
-            );
- 
+    sqMlt_C <= sqMlt;
+    sqMlt_P <= sqMlt;
+
+  -- ***************************************************************************
+  -- A_mux logic.
+  -- This is a sift register which is initialized with input ke_e_d
+  -- and shifted right once in every 256 clock cycles.
+  -- ***************************************************************************
+    A_mux_sel_reg: process (clk, reset_n) begin
+        if (reset_n = '0') then
+            A_mux_sel_r <= '1';
+        elsif (clk'event and clk='1') then
+            if (reg_en = '1') then
+                A_mux_sel_r <= not(A_mux_sel) or start;
+            end if;
+        end if;
+    end process A_mux_sel_reg;
+    
+    A_mux_sel <= sel and A_mux_sel_r;
+    
+    A_mux_o <= c_reg when A_mux_sel = '1' else
+               p_reg;
+  -- ***************************************************************************
+
   -- update register when mod_mult finished or when we start calculation
     reg_en <=  reg_en_i or start;
     
   -- define load and shift signals for shift register
     load_e  <= start; 
-    shift_e <= reg_en;
+    shift_e <= not(A_mux_sel) and reg_en;
     
             
   -- ***************************************************************************
@@ -154,7 +165,7 @@ begin
         end if;
     end process finish_register;
     
-    
+    sel <= shift_register_e(0);
   -- ***************************************************************************
   -- Multiplexe MxC1 (See microarchitecture for RL Binary method)
   -- This Mux selects between output of register C and output of mod_mult for C.
@@ -194,11 +205,11 @@ begin
             c_reg <= (others => '0');
             p_reg <= (others => '0');
         elsif (clk'event and clk='1') then
-            if (reg_en = '1') then
---                c255b <= c_nxt(255);
+            if (((A_mux_sel and reg_en) = '1') or (start = '1')) then
                 c_reg <= c_nxt;
+            end if;
+            if (((not(A_mux_sel) and reg_en) = '1') or (start = '1')) then
                 p_reg <= p_nxt;
---                p255b <= p_nxt(255);
             end if;
         end if;
     end process C_P_registers;
