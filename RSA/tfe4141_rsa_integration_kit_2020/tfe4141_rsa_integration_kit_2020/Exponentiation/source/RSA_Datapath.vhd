@@ -109,10 +109,10 @@ begin
   -- ***************************************************************************
     A_mux_sel_reg: process (clk, reset_n) begin
         if (reset_n = '0') then
-            A_mux_sel_r <= '1';
+            A_mux_sel_r <= '0';
         elsif (clk'event and clk='1') then
             if (reg_en = '1') then
-                A_mux_sel_r <= not(A_mux_sel) or start;
+                A_mux_sel_r <= not(A_mux_sel) and not(start);
             end if;
         end if;
     end process A_mux_sel_reg;
@@ -182,7 +182,7 @@ begin
   -- Decision is based on the input start
   -- ***************************************************************************
   
-    c_nxt <= one when start = '1' else
+    c_nxt <= m when start = '1' else
              MxC1_o;
              
              
