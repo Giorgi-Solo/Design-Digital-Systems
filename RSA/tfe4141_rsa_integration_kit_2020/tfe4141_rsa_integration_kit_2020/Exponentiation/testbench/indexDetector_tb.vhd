@@ -54,6 +54,9 @@ architecture Behavioral of indexDetector_tb is
     
     signal A_outCorrect : std_logic_vector(255 downto 0) := x"8000000000000000000000000000000000000000000000000000000000000000";
     signal indexCorrect : integer := 0;
+    
+    signal tmp : std_logic_vector(256 downto 0);-- := x"8000000000000000000000000000000000000000000000000000000000000000";
+
 begin
 
     dutIndexDetector: entity work.indexDetector
@@ -157,7 +160,9 @@ begin
             report "Return A_out Value is Incorrect"
             severity failure;
     
-    
+    tmp <= (others => '0');
+    wait for clkPeriod;
+    tmp(255-index) <= '1';
     wait for waitTime;
     report "All Test PASSED"
         severity failure;
