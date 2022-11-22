@@ -47,15 +47,15 @@ entity selector is
 end selector;
 
 architecture Behavioral of selector is
-    signal counter : integer := 0; --std_logic_vector(counterSize -1 downto 0);
+    signal counter : unsigned(4 downto 0):= (others => '0'); --std_logic_vector(counterSize -1 downto 0);
 begin
     idSelector: process (clk, reset_n) begin
         if (reset_n = '0') then
-            counter <= 0;
+            counter <= (others => '0');
         elsif (clk'event and clk='1') then
             if ((valid = '1') and (ready = '1')) then
                 if (counter = (coreNumber - 1)) then
-                    counter <= 0;
+                    counter <= (others => '0');
                 else
                     counter <= counter + 1;
                 end if; 
@@ -63,5 +63,5 @@ begin
         end if;
     end process idSelector;
     
-    id <= counter;
+    id <= TO_INTEGER(counter);
 end Behavioral;
