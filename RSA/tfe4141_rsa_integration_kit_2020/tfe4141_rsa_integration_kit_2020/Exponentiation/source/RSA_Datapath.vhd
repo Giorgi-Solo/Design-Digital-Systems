@@ -16,6 +16,7 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 
 entity RSA_Datapath is
@@ -66,9 +67,34 @@ architecture Behavioral of RSA_Datapath is
     
     signal c255b, p255b : std_logic;
     constant one : std_logic_vector(255 downto 0) := x"0000000000000000000000000000000000000000000000000000000000000001";
-
+    
+    signal tmp, cnt_internal : std_logic_vector(7 downto 0);
+--    signal cnt_internal : unsigned(7 downto 0);
+    signal finish_en : std_logic;
 begin
    -- Instatiations for counter and mod_mult
+   tmp <= x"FB" when key_e_d(3) = '1' else
+         "00010000"; --00010000
+         
+   process (clk, reset_n) begin
+        if (reset_n = '0') then
+            cnt_internal <= (others => '0');
+            finish_en <= '0';
+        elsif (clk'event and clk='1') then
+            if (start = '1') then
+                cnt_internal <= (others => '0');
+            elsif (shift_e = '1') then
+                cnt_internal <= std_logic_vector(unsigned(cnt_internal) + 1);
+            end if;
+            
+            if(cnt_internal = tmp) then
+                finish_en <= '1';
+            else
+                finish_en <= '0';
+            end if;
+        end if;
+   end process;
+   
     counter: entity work.counter
     port map
             (
@@ -157,7 +183,7 @@ begin
         if (reset_n = '0') then
             finished_reg <= '0';
         elsif (clk'event and clk='1') then
-            if ((shift_register_e = one) and (shift_e = '1')) then
+            if ((finish_en = '1') and (shift_e = '1')) then
                 finished_reg <= '1';
             else 
                 finished_reg <= '0';
